@@ -1,0 +1,14 @@
+.DS_Store
+.vscode
+.idea
+
+# A bit weird
+!/node_modules
+/node_modules/*
+!/node_modules/bootstrap
+# dep for CSVDownloader
+!/node_modules/papaparse
+
+# Comment to use github static version (build and push)
+# /docs/build/
+# docs/vendor/bootstrap
