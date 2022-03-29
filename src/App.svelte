@@ -144,9 +144,9 @@
                 <h1 class="pb-4 mb-5 border-bottom border-primary">Bienvenue {employerName}!</h1>
                 <div class="row">
                     <p class="lead">Avant de vous parler un peu plus de moi, je souhaiterais savoir un peu plus ce que
-                        vous me proposer</p>
+                        vous me proposez</p>
                     <p class="lead">Cela vous fera gagner du temps, car si le type d'emploi que vous me proposez ne me
-                        convient pas nous le seront très rapidement.</p>
+                        convient pas nous le saurons très rapidement.</p>
                     <button type="button" class="mt-3 btn btn-outline-primary" on:click={handleP1Explication}>
                         Commencer (2~5 min)
                     </button>
