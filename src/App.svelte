@@ -8,7 +8,7 @@
   import { SECTOR } from "./enum/sector";
   import { CONTRACT } from "./enum/contract";
   import CSVDownloader from "./CSVDownloader.svelte";
-  import { GAME_OVER_LOCATION, GAME_OVER_LOCATION_REMOTE, GAME_OVER_SECTOR } from "./const";
+  import { GAME_OVER_HL, GAME_OVER_LOCATION, GAME_OVER_LOCATION_REMOTE, GAME_OVER_SECTOR } from "./const";
   import About from "./About.svelte";
 
   // Steps
@@ -22,11 +22,12 @@
   let p2Location: boolean = false
   let p2InvalidLocation: boolean = false;
   let p2LocationRemoteDilemma: boolean = false;
+  let p3HL: boolean = false;
   let p9GameOver: boolean = false;
   let p9GameOverExplanation: string = "";
   let p9Result: boolean = false;
   let progressBar: number = 0;
-  const progressBarTotalSteps: number = 6;
+  const progressBarTotalSteps: number = 8;
 
   // Job infos
   let employerName: string;
@@ -35,9 +36,14 @@
   let remote: number;
   let location: string;
   let locationRemoteDilemma: boolean;
+  let HLTimeDilemma: boolean = false;
 
   function incrementProgressBar() {
     progressBar += 100 / progressBarTotalSteps;
+  }
+
+  function finishProgressBar() {
+    progressBar = 100;
   }
 
   function initGameOver(reason: string) {
@@ -77,7 +83,6 @@
     contract = val;
     p2Contract = false;
     p2Remote = true;
-    console.log(contract);
     incrementProgressBar();
   }
 
@@ -100,8 +105,12 @@
         locationRemoteDilemma = true;
         p2LocationRemoteDilemma = true;
       } else {
-        p9Result = true;
-        incrementProgressBar();
+        if (contract === CONTRACT.FULL_TIME) {
+          p3HL = true;
+        } else {
+          p9Result = true;
+        }
+        finishProgressBar();
       }
     }
   }
@@ -110,10 +119,25 @@
     p2LocationRemoteDilemma = false;
     if (answer) {
       remote = 4;
-      p9Result = true;
-      incrementProgressBar();
+      if (contract === CONTRACT.FULL_TIME) {
+        p3HL = true;
+      } else {
+        p9Result = true;
+      }
+      finishProgressBar();
     } else
       initGameOver(GAME_OVER_LOCATION_REMOTE);
+  }
+
+  function handleP3HL(val: string): void {
+    p3HL = false;
+    if (!val) {
+      initGameOver(GAME_OVER_HL);
+    } else {
+      HLTimeDilemma = true;
+      finishProgressBar();
+      p9Result = true;
+    }
   }
 </script>
 
@@ -141,10 +165,10 @@
 
         {#if p1Explication}
             <div in:fade="{{ delay: 500 , duration: 1000 }}" out:fade="{{delay: 0, duration: 500}}">
-                <h1 class="pb-4 mb-5 border-bottom border-primary">Bienvenue {employerName}!</h1>
+                <h1 class="pb-4 mb-5 border-bottom border-primary">Bienvenue {employerName} !</h1>
                 <div class="row">
                     <p class="lead">Avant de vous parler un peu plus de moi, je souhaiterais savoir un peu plus ce que
-                        vous me proposez</p>
+                        vous me proposez.</p>
                     <p class="lead">Cela vous fera gagner du temps, car si le type d'emploi que vous me proposez ne me
                         convient pas nous le saurons très rapidement.</p>
                     <button type="button" class="mt-3 btn btn-outline-primary" on:click={handleP1Explication}>
@@ -193,17 +217,17 @@
 
         {#if p2Remote}
             <div in:fade="{{ delay: 500 , duration: 1000 }}" out:fade="{{delay: 0, duration: 500}}">
-                <h1 class="pb-4 mb-5 border-bottom border-primary">Quel est votre politique de télétravail ?</h1>
+                <h1 class="pb-4 mb-5 border-bottom border-primary">Quelle est votre politique de télétravail ?</h1>
                 <div class="row">
                     <p class="lead">Il s'agit d'une <b>moyenne hebdomadaire</b> du nombre de <b>journées
-                        télétravaillées</b></p>
+                        télétravaillées.</b></p>
                     <p class="lead"><i>Si par exemple vous travaillez avec des sprints de trois semaines et que vous
                         souhaitez que l'équipe se réunisse deux jours consécutifs pour des cérémonies vous pouvez
-                        sélectionner 4j/5</i></p>
+                        sélectionner 4j/5.</i></p>
                     {#if contract === CONTRACT.PART_TIME}
                         <div class="mt-3 alert alert-warning" role="alert">
                             Cas particulier du temps partiel : Merci de faire au prorata sur une semaine de 5j
-                            <i> (désolé je n'ai pas codé ce cas particulier #80/20)</i>
+                            <i> (désolé je n'ai pas codé ce cas particulier #80/20)</i>.
                         </div>
                     {/if}
                     <input type=range bind:value={p2RemoteVal} min=0 max=5>
@@ -251,7 +275,7 @@
                 <h1 class="pb-4 mb-5 border-bottom border-primary">Tension : Localisation/Télétravail</h1>
                 <div class="row justify-content-center">
                     <p class="lead">Votre bureau est en dehors de mon département et vous me proposer en
-                        moyenne {remote} jours de télétravail par semaines</p>
+                        moyenne {remote} jours de télétravail par semaines.</p>
                     <p class="lead">Je ne souhaite pas déménager, ni passer beaucoup de temps dans les transports.</p>
                     <p class="lead">Consentez-vous à passer en moyenne quatre jours de télétravail par semaine ?</p>
                     <button class="col-4 m-3 btn btn-outline-primary"
@@ -260,6 +284,27 @@
                     </button>
                     <button class="col-4 m-3 btn btn-outline-primary"
                             on:click={() => handleP2locationRemoteDilemma(false)}>
+                        Non
+                    </button>
+                </div>
+            </div>
+        {/if}
+
+        {#if p3HL}
+            <div in:fade="{{ delay: 500 , duration: 1000 }}" out:fade="{{delay: 0, duration: 500}}">
+                <h1 class="pb-4 mb-5 border-bottom border-primary">Temps partiel</h1>
+                <div class="row">
+                    <p class="lead">Je suis bénévole dans l'association Hameaux Légers avec un engagement d'un jour par
+                        semaine.</p>
+                    <p class="lead">Afin de pouvoir continuer mon engagement dans cette association j'ai besoin d'avoir
+                        un contrat maximum de quatre jours par semaines.</p>
+                    <p class="lead">Est ce que cela est compatible avec votre offre d'emploi ?</p>
+                    <button class="col-4 m-3 btn btn-outline-primary"
+                            on:click={() => handleP3HL(true)}>
+                        Oui
+                    </button>
+                    <button class="col-4 m-3 btn btn-outline-primary"
+                            on:click={() => handleP3HL(false)}>
                         Non
                     </button>
                 </div>
@@ -287,19 +332,22 @@
                         Télécharger le fichier
                     </CSVDownloader>
                     <div class="row mt-5">
+                        <p class="lead">J'auto construit en ce moment ma maison la fin de chantier est prévu pour cet
+                            été. Je serai disponible à partir de septembre (sauf mission à temps partielles et
+                            freelance)</p>
                         <p class="lead">Pour prendre contact merci de m'envoyer un courriel à :</p>
                         <div class="col-5">
                             <h6 class="pb-2 my-3 border-bottom border-primary">Méthode Semi-Auto</h6>
                             <div class="row">
                                 <a class="btn btn-outline-primary"
-                                   href="mailto:damien@giraudet.me?subject=[job-success]">Lien mailto</a>
+                                   href="mailto:damien@giraudet.me?subject=[job-success-v1.1]">Lien mailto</a>
                                 <p class="text-sm-start mt-3"><kbd>avec le fichier .csv en pièce jointe</kbd></p>
                             </div>
                         </div>
                         <div class="col-7">
                             <h6 class="pb-2 my-3 border-bottom border-primary">Méthode Manuelle</h6>
                             <p class="text-justify"><kbd>damien@giraudet.me</kbd> avec comme préfixe à votre objet
-                                <kbd>[job-success]</kbd>.</p>
+                                <kbd>[job-success-v1.1]</kbd>.</p>
                             <p class="text-justify"> C'est important de bien mettre ce préfixe à votre objet et
                                 <kbd>avec le fichier .csv en pièce jointe</kbd> sinon
                                 <del>je</del>
@@ -315,22 +363,22 @@
                 <h1 class="pb-4 mb-5 border-bottom border-primary">Fin du voyage</h1>
                 <div class="row">
                     <p class="lead">Merci {employerName} d'avoir répondu à ces question.</p>
-                    <p class="lead">Nous ne pourons pas travailler ensemble car {p9GameOverExplanation}</p>
+                    <p class="lead">Nous ne pourrons pas travailler ensemble car {p9GameOverExplanation}</p>
                     <div class="row">
-                        <p class="text-sm-start">Si malgrès tout vous pensez que nous pourrions tout de même travailler
+                        <p class="text-sm-start">Si malgré tout vous pensez que nous pourrions tout de même travailler
                             ensemble vous pouvez m'envoyer un courriel à :</p>
                         <div class="col-4">
                             <h6 class="pb-2 my-3 border-bottom border-primary">Méthode Auto</h6>
                             <div class="row">
                                 <a class="btn btn-outline-primary"
-                                   href="mailto:damien@giraudet.me?subject=[job-retry]">
+                                   href="mailto:damien@giraudet.me?subject=[job-retry-v1.1]">
                                     Lien mailto</a>
                             </div>
                         </div>
                         <div class="col-8">
                             <h6 class="pb-2 my-3 border-bottom border-primary">Méthode Manuelle</h6>
                             <p class="text-justify"><kbd>damien@giraudet.me</kbd> avec comme préfixe de votre objet
-                                <kbd>[job-retry]</kbd>.</p>
+                                <kbd>[job-retry-v1.1]</kbd>.</p>
                             <p class="text-justify"> C'est important de bien mettre ce préfixe à votre objet sinon
                                 <del>je</del>
                                 mon automatisation ne traitera pas le courriel.

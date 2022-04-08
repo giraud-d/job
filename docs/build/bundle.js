@@ -1,9 +1,3391 @@
-var app=function(){"use strict";function e(){}const t=e=>e;function n(e){return e()}function r(){return Object.create(null)}function i(e){e.forEach(n)}function s(e){return"function"==typeof e}function o(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}function a(e,t,n,r){return e[1]&&r?function(e,t){for(const n in t)e[n]=t[n];return e}(n.ctx.slice(),e[1](r(t))):n.ctx}const l="undefined"!=typeof window;let u=l?()=>window.performance.now():()=>Date.now(),c=l?e=>requestAnimationFrame(e):e;const d=new Set;function f(e){d.forEach((t=>{t.c(e)||(d.delete(t),t.f())})),0!==d.size&&c(f)}function p(e){let t;return 0===d.size&&c(f),{promise:new Promise((n=>{d.add(t={c:e,f:n})})),abort(){d.delete(t)}}}function h(e,t){e.appendChild(t)}function m(e){if(!e)return document;const t=e.getRootNode?e.getRootNode():e.ownerDocument;return t&&t.host?t:e.ownerDocument}function g(e){const t=y("style");return function(e,t){h(e.head||e,t)}(m(e),t),t}function b(e,t,n){e.insertBefore(t,n||null)}function v(e){e.parentNode.removeChild(e)}function y(e){return document.createElement(e)}function _(e){return document.createTextNode(e)}function k(){return _(" ")}function x(e,t,n,r){return e.addEventListener(t,n,r),()=>e.removeEventListener(t,n,r)}function w(e,t,n){null==n?e.removeAttribute(t):e.getAttribute(t)!==n&&e.setAttribute(t,n)}function C(e,t){t=""+t,e.wholeText!==t&&(e.data=t)}function E(e,t){e.value=null==t?"":t}function R(e,t,n,r){e.style.setProperty(t,n,r?"important":"")}const $=new Set;let S,T=0;function O(e,t,n,r,i,s,o,a=0){const l=16.666/r;let u="{\n";for(let e=0;e<=1;e+=l){const r=t+(n-t)*s(e);u+=100*e+`%{${o(r,1-r)}}\n`}const c=u+`100% {${o(n,1-n)}}\n}`,d=`__svelte_${function(e){let t=5381,n=e.length;for(;n--;)t=(t<<5)-t^e.charCodeAt(n);return t>>>0}(c)}_${a}`,f=m(e);$.add(f);const p=f.__svelte_stylesheet||(f.__svelte_stylesheet=g(e).sheet),h=f.__svelte_rules||(f.__svelte_rules={});h[d]||(h[d]=!0,p.insertRule(`@keyframes ${d} ${c}`,p.cssRules.length));const b=e.style.animation||"";return e.style.animation=`${b?`${b}, `:""}${d} ${r}ms linear ${i}ms 1 both`,T+=1,d}function A(e,t){const n=(e.style.animation||"").split(", "),r=n.filter(t?e=>e.indexOf(t)<0:e=>-1===e.indexOf("__svelte")),i=n.length-r.length;i&&(e.style.animation=r.join(", "),T-=i,T||c((()=>{T||($.forEach((e=>{const t=e.__svelte_stylesheet;let n=t.cssRules.length;for(;n--;)t.deleteRule(n);e.__svelte_rules={}})),$.clear())})))}function j(e){S=e}const L=[],D=[],M=[],I=[],q=Promise.resolve();let F=!1;function z(e){M.push(e)}let N=!1;const P=new Set;function U(){if(!N){N=!0;do{for(let e=0;e<L.length;e+=1){const t=L[e];j(t),B(t.$$)}for(j(null),L.length=0;D.length;)D.pop()();for(let e=0;e<M.length;e+=1){const t=M[e];P.has(t)||(P.add(t),t())}M.length=0}while(L.length);for(;I.length;)I.pop()();F=!1,N=!1,P.clear()}}function B(e){if(null!==e.fragment){e.update(),i(e.before_update);const t=e.dirty;e.dirty=[-1],e.fragment&&e.fragment.p(e.ctx,t),e.after_update.forEach(z)}}let H;function K(){return H||(H=Promise.resolve(),H.then((()=>{H=null}))),H}function W(e,t,n){e.dispatchEvent(function(e,t,n=!1){const r=document.createEvent("CustomEvent");return r.initCustomEvent(e,n,!1,t),r}(`${t?"intro":"outro"}${n}`))}const Q=new Set;let G;function V(){G={r:0,c:[],p:G}}function J(){G.r||i(G.c),G=G.p}function Z(e,t){e&&e.i&&(Q.delete(e),e.i(t))}function Y(e,t,n,r){if(e&&e.o){if(Q.has(e))return;Q.add(e),G.c.push((()=>{Q.delete(e),r&&(n&&e.d(1),r())})),e.o(t)}}const X={duration:0};function ee(n,r,i){let o,a,l=r(n,i),c=!1,d=0;function f(){o&&A(n,o)}function h(){const{delay:r=0,duration:i=300,easing:s=t,tick:h=e,css:m}=l||X;m&&(o=O(n,0,1,i,r,s,m,d++)),h(0,1);const g=u()+r,b=g+i;a&&a.abort(),c=!0,z((()=>W(n,!0,"start"))),a=p((e=>{if(c){if(e>=b)return h(1,0),W(n,!0,"end"),f(),c=!1;if(e>=g){const t=s((e-g)/i);h(t,1-t)}}return c}))}let m=!1;return{start(){m||(m=!0,A(n),s(l)?(l=l(),K().then(h)):h())},invalidate(){m=!1},end(){c&&(f(),c=!1)}}}function te(n,r,o){let a,l=r(n,o),c=!0;const d=G;function f(){const{delay:r=0,duration:s=300,easing:o=t,tick:f=e,css:h}=l||X;h&&(a=O(n,1,0,s,r,o,h));const m=u()+r,g=m+s;z((()=>W(n,!1,"start"))),p((e=>{if(c){if(e>=g)return f(0,1),W(n,!1,"end"),--d.r||i(d.c),!1;if(e>=m){const t=o((e-m)/s);f(1-t,t)}}return c}))}return d.r+=1,s(l)?K().then((()=>{l=l(),f()})):f(),{end(e){e&&l.tick&&l.tick(1,0),c&&(a&&A(n,a),c=!1)}}}function ne(e){e&&e.c()}function re(e,t,r,o){const{fragment:a,on_mount:l,on_destroy:u,after_update:c}=e.$$;a&&a.m(t,r),o||z((()=>{const t=l.map(n).filter(s);u?u.push(...t):i(t),e.$$.on_mount=[]})),c.forEach(z)}function ie(e,t){const n=e.$$;null!==n.fragment&&(i(n.on_destroy),n.fragment&&n.fragment.d(t),n.on_destroy=n.fragment=null,n.ctx=[])}function se(e,t){-1===e.$$.dirty[0]&&(L.push(e),F||(F=!0,q.then(U)),e.$$.dirty.fill(0)),e.$$.dirty[t/31|0]|=1<<t%31}function oe(t,n,s,o,a,l,u,c=[-1]){const d=S;j(t);const f=t.$$={fragment:null,ctx:null,props:l,update:e,not_equal:a,bound:r(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(n.context||(d?d.$$.context:[])),callbacks:r(),dirty:c,skip_bound:!1,root:n.target||d.$$.root};u&&u(f.root);let p=!1;if(f.ctx=s?s(t,n.props||{},((e,n,...r)=>{const i=r.length?r[0]:n;return f.ctx&&a(f.ctx[e],f.ctx[e]=i)&&(!f.skip_bound&&f.bound[e]&&f.bound[e](i),p&&se(t,e)),n})):[],f.update(),p=!0,i(f.before_update),f.fragment=!!o&&o(f.ctx),n.target){if(n.hydrate){const e=function(e){return Array.from(e.childNodes)}(n.target);f.fragment&&f.fragment.l(e),e.forEach(v)}else f.fragment&&f.fragment.c();n.intro&&Z(t.$$.fragment),re(t,n.target,n.anchor,n.customElement),U()}j(d)}class ae{$destroy(){ie(this,1),this.$destroy=e}$on(e,t){const n=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return n.push(t),()=>{const e=n.indexOf(t);-1!==e&&n.splice(e,1)}}$set(e){var t;this.$$set&&(t=e,0!==Object.keys(t).length)&&(this.$$.skip_bound=!0,this.$$set(e),this.$$.skip_bound=!1)}}function le(e,{delay:n=0,duration:r=400,easing:i=t}={}){const s=+getComputedStyle(e).opacity;return{delay:n,duration:r,easing:i,css:e=>"opacity: "+e*s}}var ue,ce;!function(e){e.GOOD="good",e.NEUTRAL="neutral",e.BAD="bad"}(ue||(ue={})),function(e){e.FULL_TIME="full_time",e.PART_TIME="part_time",e.FREELANCE="freelance"}(ce||(ce={}));"undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self&&self;
-/* @license
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+var app = (function () {
+    'use strict';
+
+    function noop() { }
+    const identity = x => x;
+    function assign(tar, src) {
+        // @ts-ignore
+        for (const k in src)
+            tar[k] = src[k];
+        return tar;
+    }
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function is_empty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+    function create_slot(definition, ctx, $$scope, fn) {
+        if (definition) {
+            const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
+            return definition[0](slot_ctx);
+        }
+    }
+    function get_slot_context(definition, ctx, $$scope, fn) {
+        return definition[1] && fn
+            ? assign($$scope.ctx.slice(), definition[1](fn(ctx)))
+            : $$scope.ctx;
+    }
+    function get_slot_changes(definition, $$scope, dirty, fn) {
+        if (definition[2] && fn) {
+            const lets = definition[2](fn(dirty));
+            if ($$scope.dirty === undefined) {
+                return lets;
+            }
+            if (typeof lets === 'object') {
+                const merged = [];
+                const len = Math.max($$scope.dirty.length, lets.length);
+                for (let i = 0; i < len; i += 1) {
+                    merged[i] = $$scope.dirty[i] | lets[i];
+                }
+                return merged;
+            }
+            return $$scope.dirty | lets;
+        }
+        return $$scope.dirty;
+    }
+    function update_slot_base(slot, slot_definition, ctx, $$scope, slot_changes, get_slot_context_fn) {
+        if (slot_changes) {
+            const slot_context = get_slot_context(slot_definition, ctx, $$scope, get_slot_context_fn);
+            slot.p(slot_context, slot_changes);
+        }
+    }
+    function get_all_dirty_from_scope($$scope) {
+        if ($$scope.ctx.length > 32) {
+            const dirty = [];
+            const length = $$scope.ctx.length / 32;
+            for (let i = 0; i < length; i++) {
+                dirty[i] = -1;
+            }
+            return dirty;
+        }
+        return -1;
+    }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function get_root_for_style(node) {
+        if (!node)
+            return document;
+        const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+        if (root && root.host) {
+            return root;
+        }
+        return node.ownerDocument;
+    }
+    function append_empty_stylesheet(node) {
+        const style_element = element('style');
+        append_stylesheet(get_root_for_style(node), style_element);
+        return style_element;
+    }
+    function append_stylesheet(node, style) {
+        append(node.head || node, style);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function to_number(value) {
+        return value === '' ? null : +value;
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function set_input_value(input, value) {
+        input.value = value == null ? '' : value;
+    }
+    function set_style(node, key, value, important) {
+        node.style.setProperty(key, value, important ? 'important' : '');
+    }
+    function custom_event(type, detail, bubbles = false) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, bubbles, false, detail);
+        return e;
+    }
+
+    const active_docs = new Set();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = get_root_for_style(node);
+        active_docs.add(doc);
+        const stylesheet = doc.__svelte_stylesheet || (doc.__svelte_stylesheet = append_empty_stylesheet(node).sheet);
+        const current_rules = doc.__svelte_rules || (doc.__svelte_rules = {});
+        if (!current_rules[name]) {
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ''}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            active_docs.forEach(doc => {
+                const stylesheet = doc.__svelte_stylesheet;
+                let i = stylesheet.cssRules.length;
+                while (i--)
+                    stylesheet.deleteRule(i);
+                doc.__svelte_rules = {};
+            });
+            active_docs.clear();
+        });
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    let flushing = false;
+    const seen_callbacks = new Set();
+    function flush() {
+        if (flushing)
+            return;
+        flushing = true;
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            for (let i = 0; i < dirty_components.length; i += 1) {
+                const component = dirty_components[i];
+                set_current_component(component);
+                update(component.$$);
+            }
+            set_current_component(null);
+            dirty_components.length = 0;
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                    callback();
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+        flushing = false;
+        seen_callbacks.clear();
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update();
+            run_all($$.before_update);
+            const dirty = $$.dirty;
+            $$.dirty = [-1];
+            $$.fragment && $$.fragment.p($$.ctx, dirty);
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_in_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = false;
+        let animation_name;
+        let task;
+        let uid = 0;
+        function cleanup() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 0, 1, duration, delay, easing, css, uid++);
+            tick(0, 1);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            if (task)
+                task.abort();
+            running = true;
+            add_render_callback(() => dispatch(node, true, 'start'));
+            task = loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(1, 0);
+                        dispatch(node, true, 'end');
+                        cleanup();
+                        return running = false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(t, 1 - t);
+                    }
+                }
+                return running;
+            });
+        }
+        let started = false;
+        return {
+            start() {
+                if (started)
+                    return;
+                started = true;
+                delete_rule(node);
+                if (is_function(config)) {
+                    config = config();
+                    wait().then(go);
+                }
+                else {
+                    go();
+                }
+            },
+            invalidate() {
+                started = false;
+            },
+            end() {
+                if (running) {
+                    cleanup();
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_out_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = true;
+        let animation_name;
+        const group = outros;
+        group.r += 1;
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            add_render_callback(() => dispatch(node, false, 'start'));
+            loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(0, 1);
+                        dispatch(node, false, 'end');
+                        if (!--group.r) {
+                            // this will result in `end()` being called,
+                            // so we don't need to clean up here
+                            run_all(group.c);
+                        }
+                        return false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(1 - t, t);
+                    }
+                }
+                return running;
+            });
+        }
+        if (is_function(config)) {
+            wait().then(() => {
+                // @ts-ignore
+                config = config();
+                go();
+            });
+        }
+        else {
+            go();
+        }
+        return {
+            end(reset) {
+                if (reset && config.tick) {
+                    config.tick(1, 0);
+                }
+                if (running) {
+                    if (animation_name)
+                        delete_rule(node, animation_name);
+                    running = false;
+                }
+            }
+        };
+    }
+    function create_component(block) {
+        block && block.c();
+    }
+    function mount_component(component, target, anchor, customElement) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        if (!customElement) {
+            // onMount happens before the initial afterUpdate
+            add_render_callback(() => {
+                const new_on_destroy = on_mount.map(run).filter(is_function);
+                if (on_destroy) {
+                    on_destroy.push(...new_on_destroy);
+                }
+                else {
+                    // Edge case - component was destroyed immediately,
+                    // most likely as a result of a binding initialising
+                    run_all(new_on_destroy);
+                }
+                component.$$.on_mount = [];
+            });
+        }
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = [];
+        }
+    }
+    function make_dirty(component, i) {
+        if (component.$$.dirty[0] === -1) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty.fill(0);
+        }
+        component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+    }
+    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            on_disconnect: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
+            // everything else
+            callbacks: blank_object(),
+            dirty,
+            skip_bound: false,
+            root: options.target || parent_component.$$.root
+        };
+        append_styles && append_styles($$.root);
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, options.props || {}, (i, ret, ...rest) => {
+                const value = rest.length ? rest[0] : ret;
+                if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                    if (!$$.skip_bound && $$.bound[i])
+                        $$.bound[i](value);
+                    if (ready)
+                        make_dirty(component, i);
+                }
+                return ret;
+            })
+            : [];
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                const nodes = children(options.target);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(nodes);
+                nodes.forEach(detach);
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor, options.customElement);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    /**
+     * Base class for Svelte components. Used when dev=false.
+     */
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set($$props) {
+            if (this.$$set && !is_empty($$props)) {
+                this.$$.skip_bound = true;
+                this.$$set($$props);
+                this.$$.skip_bound = false;
+            }
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.44.2' }, detail), true));
+    }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev('SvelteDOMInsert', { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev('SvelteDOMRemove', { node });
+        detach(node);
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+        else
+            dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
+    function validate_slots(name, slot, keys) {
+        for (const slot_key of Object.keys(slot)) {
+            if (!~keys.indexOf(slot_key)) {
+                console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+            }
+        }
+    }
+    /**
+     * Base class for Svelte components with some minor dev-enhancements. Used when dev=true.
+     */
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error("'target' is a required option");
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn('Component was already destroyed'); // eslint-disable-line no-console
+            };
+        }
+        $capture_state() { }
+        $inject_state() { }
+    }
+
+    function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
+    }
+
+    var SECTOR;
+    (function (SECTOR) {
+        SECTOR["GOOD"] = "good";
+        SECTOR["NEUTRAL"] = "neutral";
+        SECTOR["BAD"] = "bad";
+    })(SECTOR || (SECTOR = {}));
+
+    var CONTRACT;
+    (function (CONTRACT) {
+        CONTRACT["FULL_TIME"] = "full_time";
+        CONTRACT["PART_TIME"] = "part_time";
+        CONTRACT["FREELANCE"] = "freelance";
+    })(CONTRACT || (CONTRACT = {}));
+
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function createCommonjsModule(fn) {
+      var module = { exports: {} };
+    	return fn(module, module.exports), module.exports;
+    }
+
+    /* @license
     Papa Parse
     v5.3.1
     https://github.com/mholt/PapaParse
     License: MIT
     */
-var de,fe,pe=(de=function(e,t){e.exports=function e(){var t="undefined"!=typeof self?self:"undefined"!=typeof window?window:void 0!==t?t:{},n=!t.document&&!!t.postMessage,r=n&&/blob:/i.test((t.location||{}).protocol),i={},s=0,o={parse:function(n,r){var a=(r=r||{}).dynamicTyping||!1;if(k(a)&&(r.dynamicTypingFunction=a,a={}),r.dynamicTyping=a,r.transform=!!k(r.transform)&&r.transform,r.worker&&o.WORKERS_SUPPORTED){var l=function(){if(!o.WORKERS_SUPPORTED)return!1;var n,r,a=(n=t.URL||t.webkitURL||null,r=e.toString(),o.BLOB_URL||(o.BLOB_URL=n.createObjectURL(new Blob(["(",r,")();"],{type:"text/javascript"})))),l=new t.Worker(a);return l.onmessage=g,l.id=s++,i[l.id]=l}();return l.userStep=r.step,l.userChunk=r.chunk,l.userComplete=r.complete,l.userError=r.error,r.step=k(r.step),r.chunk=k(r.chunk),r.complete=k(r.complete),r.error=k(r.error),delete r.worker,void l.postMessage({input:n,config:r,workerId:l.id})}var p=null;return o.NODE_STREAM_INPUT,"string"==typeof n?p=r.download?new u(r):new d(r):!0===n.readable&&k(n.read)&&k(n.on)?p=new f(r):(t.File&&n instanceof File||n instanceof Object)&&(p=new c(r)),p.stream(n)},unparse:function(e,t){var n=!1,r=!0,i=",",s="\r\n",a='"',l=a+a,u=!1,c=null,d=!1;!function(){if("object"==typeof t){if("string"!=typeof t.delimiter||o.BAD_DELIMITERS.filter((function(e){return-1!==t.delimiter.indexOf(e)})).length||(i=t.delimiter),("boolean"==typeof t.quotes||"function"==typeof t.quotes||Array.isArray(t.quotes))&&(n=t.quotes),"boolean"!=typeof t.skipEmptyLines&&"string"!=typeof t.skipEmptyLines||(u=t.skipEmptyLines),"string"==typeof t.newline&&(s=t.newline),"string"==typeof t.quoteChar&&(a=t.quoteChar),"boolean"==typeof t.header&&(r=t.header),Array.isArray(t.columns)){if(0===t.columns.length)throw new Error("Option columns is empty");c=t.columns}void 0!==t.escapeChar&&(l=t.escapeChar+a),"boolean"==typeof t.escapeFormulae&&(d=t.escapeFormulae)}}();var f=new RegExp(h(a),"g");if("string"==typeof e&&(e=JSON.parse(e)),Array.isArray(e)){if(!e.length||Array.isArray(e[0]))return p(null,e,u);if("object"==typeof e[0])return p(c||Object.keys(e[0]),e,u)}else if("object"==typeof e)return"string"==typeof e.data&&(e.data=JSON.parse(e.data)),Array.isArray(e.data)&&(e.fields||(e.fields=e.meta&&e.meta.fields),e.fields||(e.fields=Array.isArray(e.data[0])?e.fields:"object"==typeof e.data[0]?Object.keys(e.data[0]):[]),Array.isArray(e.data[0])||"object"==typeof e.data[0]||(e.data=[e.data])),p(e.fields||[],e.data||[],u);throw new Error("Unable to serialize unrecognized input");function p(e,t,n){var o="";"string"==typeof e&&(e=JSON.parse(e)),"string"==typeof t&&(t=JSON.parse(t));var a=Array.isArray(e)&&0<e.length,l=!Array.isArray(t[0]);if(a&&r){for(var u=0;u<e.length;u++)0<u&&(o+=i),o+=m(e[u],u);0<t.length&&(o+=s)}for(var c=0;c<t.length;c++){var d=a?e.length:t[c].length,f=!1,p=a?0===Object.keys(t[c]).length:0===t[c].length;if(n&&!a&&(f="greedy"===n?""===t[c].join("").trim():1===t[c].length&&0===t[c][0].length),"greedy"===n&&a){for(var h=[],g=0;g<d;g++){var b=l?e[g]:g;h.push(t[c][b])}f=""===h.join("").trim()}if(!f){for(var v=0;v<d;v++){0<v&&!p&&(o+=i);var y=a&&l?e[v]:v;o+=m(t[c][y],v)}c<t.length-1&&(!n||0<d&&!p)&&(o+=s)}}return o}function m(e,t){if(null==e)return"";if(e.constructor===Date)return JSON.stringify(e).slice(1,25);!0===d&&"string"==typeof e&&null!==e.match(/^[=+\-@].*$/)&&(e="'"+e);var r=e.toString().replace(f,l),s="boolean"==typeof n&&n||"function"==typeof n&&n(e,t)||Array.isArray(n)&&n[t]||function(e,t){for(var n=0;n<t.length;n++)if(-1<e.indexOf(t[n]))return!0;return!1}(r,o.BAD_DELIMITERS)||-1<r.indexOf(i)||" "===r.charAt(0)||" "===r.charAt(r.length-1);return s?a+r+a:r}}};if(o.RECORD_SEP=String.fromCharCode(30),o.UNIT_SEP=String.fromCharCode(31),o.BYTE_ORDER_MARK="\ufeff",o.BAD_DELIMITERS=["\r","\n",'"',o.BYTE_ORDER_MARK],o.WORKERS_SUPPORTED=!n&&!!t.Worker,o.NODE_STREAM_INPUT=1,o.LocalChunkSize=10485760,o.RemoteChunkSize=5242880,o.DefaultDelimiter=",",o.Parser=m,o.ParserHandle=p,o.NetworkStreamer=u,o.FileStreamer=c,o.StringStreamer=d,o.ReadableStreamStreamer=f,t.jQuery){var a=t.jQuery;a.fn.parse=function(e){var n=e.config||{},r=[];return this.each((function(e){if("INPUT"!==a(this).prop("tagName").toUpperCase()||"file"!==a(this).attr("type").toLowerCase()||!t.FileReader||!this.files||0===this.files.length)return!0;for(var i=0;i<this.files.length;i++)r.push({file:this.files[i],inputElem:this,instanceConfig:a.extend({},n)})})),i(),this;function i(){if(0!==r.length){var t,n,i,l,u=r[0];if(k(e.before)){var c=e.before(u.file,u.inputElem);if("object"==typeof c){if("abort"===c.action)return t="AbortError",n=u.file,i=u.inputElem,l=c.reason,void(k(e.error)&&e.error({name:t},n,i,l));if("skip"===c.action)return void s();"object"==typeof c.config&&(u.instanceConfig=a.extend(u.instanceConfig,c.config))}else if("skip"===c)return void s()}var d=u.instanceConfig.complete;u.instanceConfig.complete=function(e){k(d)&&d(e,u.file,u.inputElem),s()},o.parse(u.file,u.instanceConfig)}else k(e.complete)&&e.complete()}function s(){r.splice(0,1),i()}}}function l(e){this._handle=null,this._finished=!1,this._completed=!1,this._halted=!1,this._input=null,this._baseIndex=0,this._partialLine="",this._rowCount=0,this._start=0,this._nextChunk=null,this.isFirstChunk=!0,this._completeResults={data:[],errors:[],meta:{}},function(e){var t=y(e);t.chunkSize=parseInt(t.chunkSize),e.step||e.chunk||(t.chunkSize=null),this._handle=new p(t),(this._handle.streamer=this)._config=t}.call(this,e),this.parseChunk=function(e,n){if(this.isFirstChunk&&k(this._config.beforeFirstChunk)){var i=this._config.beforeFirstChunk(e);void 0!==i&&(e=i)}this.isFirstChunk=!1,this._halted=!1;var s=this._partialLine+e;this._partialLine="";var a=this._handle.parse(s,this._baseIndex,!this._finished);if(!this._handle.paused()&&!this._handle.aborted()){var l=a.meta.cursor;this._finished||(this._partialLine=s.substring(l-this._baseIndex),this._baseIndex=l),a&&a.data&&(this._rowCount+=a.data.length);var u=this._finished||this._config.preview&&this._rowCount>=this._config.preview;if(r)t.postMessage({results:a,workerId:o.WORKER_ID,finished:u});else if(k(this._config.chunk)&&!n){if(this._config.chunk(a,this._handle),this._handle.paused()||this._handle.aborted())return void(this._halted=!0);a=void 0,this._completeResults=void 0}return this._config.step||this._config.chunk||(this._completeResults.data=this._completeResults.data.concat(a.data),this._completeResults.errors=this._completeResults.errors.concat(a.errors),this._completeResults.meta=a.meta),this._completed||!u||!k(this._config.complete)||a&&a.meta.aborted||(this._config.complete(this._completeResults,this._input),this._completed=!0),u||a&&a.meta.paused||this._nextChunk(),a}this._halted=!0},this._sendError=function(e){k(this._config.error)?this._config.error(e):r&&this._config.error&&t.postMessage({workerId:o.WORKER_ID,error:e,finished:!1})}}function u(e){var t;(e=e||{}).chunkSize||(e.chunkSize=o.RemoteChunkSize),l.call(this,e),this._nextChunk=n?function(){this._readChunk(),this._chunkLoaded()}:function(){this._readChunk()},this.stream=function(e){this._input=e,this._nextChunk()},this._readChunk=function(){if(this._finished)this._chunkLoaded();else{if(t=new XMLHttpRequest,this._config.withCredentials&&(t.withCredentials=this._config.withCredentials),n||(t.onload=_(this._chunkLoaded,this),t.onerror=_(this._chunkError,this)),t.open(this._config.downloadRequestBody?"POST":"GET",this._input,!n),this._config.downloadRequestHeaders){var e=this._config.downloadRequestHeaders;for(var r in e)t.setRequestHeader(r,e[r])}if(this._config.chunkSize){var i=this._start+this._config.chunkSize-1;t.setRequestHeader("Range","bytes="+this._start+"-"+i)}try{t.send(this._config.downloadRequestBody)}catch(e){this._chunkError(e.message)}n&&0===t.status&&this._chunkError()}},this._chunkLoaded=function(){4===t.readyState&&(t.status<200||400<=t.status?this._chunkError():(this._start+=this._config.chunkSize?this._config.chunkSize:t.responseText.length,this._finished=!this._config.chunkSize||this._start>=function(e){var t=e.getResponseHeader("Content-Range");return null===t?-1:parseInt(t.substring(t.lastIndexOf("/")+1))}(t),this.parseChunk(t.responseText)))},this._chunkError=function(e){var n=t.statusText||e;this._sendError(new Error(n))}}function c(e){var t,n;(e=e||{}).chunkSize||(e.chunkSize=o.LocalChunkSize),l.call(this,e);var r="undefined"!=typeof FileReader;this.stream=function(e){this._input=e,n=e.slice||e.webkitSlice||e.mozSlice,r?((t=new FileReader).onload=_(this._chunkLoaded,this),t.onerror=_(this._chunkError,this)):t=new FileReaderSync,this._nextChunk()},this._nextChunk=function(){this._finished||this._config.preview&&!(this._rowCount<this._config.preview)||this._readChunk()},this._readChunk=function(){var e=this._input;if(this._config.chunkSize){var i=Math.min(this._start+this._config.chunkSize,this._input.size);e=n.call(e,this._start,i)}var s=t.readAsText(e,this._config.encoding);r||this._chunkLoaded({target:{result:s}})},this._chunkLoaded=function(e){this._start+=this._config.chunkSize,this._finished=!this._config.chunkSize||this._start>=this._input.size,this.parseChunk(e.target.result)},this._chunkError=function(){this._sendError(t.error)}}function d(e){var t;l.call(this,e=e||{}),this.stream=function(e){return t=e,this._nextChunk()},this._nextChunk=function(){if(!this._finished){var e,n=this._config.chunkSize;return n?(e=t.substring(0,n),t=t.substring(n)):(e=t,t=""),this._finished=!t,this.parseChunk(e)}}}function f(e){l.call(this,e=e||{});var t=[],n=!0,r=!1;this.pause=function(){l.prototype.pause.apply(this,arguments),this._input.pause()},this.resume=function(){l.prototype.resume.apply(this,arguments),this._input.resume()},this.stream=function(e){this._input=e,this._input.on("data",this._streamData),this._input.on("end",this._streamEnd),this._input.on("error",this._streamError)},this._checkIsFinished=function(){r&&1===t.length&&(this._finished=!0)},this._nextChunk=function(){this._checkIsFinished(),t.length?this.parseChunk(t.shift()):n=!0},this._streamData=_((function(e){try{t.push("string"==typeof e?e:e.toString(this._config.encoding)),n&&(n=!1,this._checkIsFinished(),this.parseChunk(t.shift()))}catch(e){this._streamError(e)}}),this),this._streamError=_((function(e){this._streamCleanUp(),this._sendError(e)}),this),this._streamEnd=_((function(){this._streamCleanUp(),r=!0,this._streamData("")}),this),this._streamCleanUp=_((function(){this._input.removeListener("data",this._streamData),this._input.removeListener("end",this._streamEnd),this._input.removeListener("error",this._streamError)}),this)}function p(e){var t,n,r,i=Math.pow(2,53),s=-i,a=/^\s*-?(\d+\.?|\.\d+|\d+\.\d+)([eE][-+]?\d+)?\s*$/,l=/^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/,u=this,c=0,d=0,f=!1,p=!1,g=[],b={data:[],errors:[],meta:{}};if(k(e.step)){var v=e.step;e.step=function(t){if(b=t,w())x();else{if(x(),0===b.data.length)return;c+=t.data.length,e.preview&&c>e.preview?n.abort():(b.data=b.data[0],v(b,u))}}}function _(t){return"greedy"===e.skipEmptyLines?""===t.join("").trim():1===t.length&&0===t[0].length}function x(){if(b&&r&&(E("Delimiter","UndetectableDelimiter","Unable to auto-detect delimiting character; defaulted to '"+o.DefaultDelimiter+"'"),r=!1),e.skipEmptyLines)for(var t=0;t<b.data.length;t++)_(b.data[t])&&b.data.splice(t--,1);return w()&&function(){if(b)if(Array.isArray(b.data[0])){for(var t=0;w()&&t<b.data.length;t++)b.data[t].forEach(n);b.data.splice(0,1)}else b.data.forEach(n);function n(t,n){k(e.transformHeader)&&(t=e.transformHeader(t,n)),g.push(t)}}(),function(){if(!b||!e.header&&!e.dynamicTyping&&!e.transform)return b;function t(t,n){var r,i=e.header?{}:[];for(r=0;r<t.length;r++){var s=r,o=t[r];e.header&&(s=r>=g.length?"__parsed_extra":g[r]),e.transform&&(o=e.transform(o,s)),o=C(s,o),"__parsed_extra"===s?(i[s]=i[s]||[],i[s].push(o)):i[s]=o}return e.header&&(r>g.length?E("FieldMismatch","TooManyFields","Too many fields: expected "+g.length+" fields but parsed "+r,d+n):r<g.length&&E("FieldMismatch","TooFewFields","Too few fields: expected "+g.length+" fields but parsed "+r,d+n)),i}var n=1;return!b.data.length||Array.isArray(b.data[0])?(b.data=b.data.map(t),n=b.data.length):b.data=t(b.data,0),e.header&&b.meta&&(b.meta.fields=g),d+=n,b}()}function w(){return e.header&&0===g.length}function C(t,n){return r=t,e.dynamicTypingFunction&&void 0===e.dynamicTyping[r]&&(e.dynamicTyping[r]=e.dynamicTypingFunction(r)),!0===(e.dynamicTyping[r]||e.dynamicTyping)?"true"===n||"TRUE"===n||"false"!==n&&"FALSE"!==n&&(function(e){if(a.test(e)){var t=parseFloat(e);if(s<t&&t<i)return!0}return!1}(n)?parseFloat(n):l.test(n)?new Date(n):""===n?null:n):n;var r}function E(e,t,n,r){var i={type:e,code:t,message:n};void 0!==r&&(i.row=r),b.errors.push(i)}this.parse=function(i,s,a){var l=e.quoteChar||'"';if(e.newline||(e.newline=function(e,t){e=e.substring(0,1048576);var n=new RegExp(h(t)+"([^]*?)"+h(t),"gm"),r=(e=e.replace(n,"")).split("\r"),i=e.split("\n"),s=1<i.length&&i[0].length<r[0].length;if(1===r.length||s)return"\n";for(var o=0,a=0;a<r.length;a++)"\n"===r[a][0]&&o++;return o>=r.length/2?"\r\n":"\r"}(i,l)),r=!1,e.delimiter)k(e.delimiter)&&(e.delimiter=e.delimiter(i),b.meta.delimiter=e.delimiter);else{var u=function(t,n,r,i,s){var a,l,u,c;s=s||[",","\t","|",";",o.RECORD_SEP,o.UNIT_SEP];for(var d=0;d<s.length;d++){var f=s[d],p=0,h=0,g=0;u=void 0;for(var b=new m({comments:i,delimiter:f,newline:n,preview:10}).parse(t),v=0;v<b.data.length;v++)if(r&&_(b.data[v]))g++;else{var y=b.data[v].length;h+=y,void 0!==u?0<y&&(p+=Math.abs(y-u),u=y):u=y}0<b.data.length&&(h/=b.data.length-g),(void 0===l||p<=l)&&(void 0===c||c<h)&&1.99<h&&(l=p,a=f,c=h)}return{successful:!!(e.delimiter=a),bestDelimiter:a}}(i,e.newline,e.skipEmptyLines,e.comments,e.delimitersToGuess);u.successful?e.delimiter=u.bestDelimiter:(r=!0,e.delimiter=o.DefaultDelimiter),b.meta.delimiter=e.delimiter}var c=y(e);return e.preview&&e.header&&c.preview++,t=i,n=new m(c),b=n.parse(t,s,a),x(),f?{meta:{paused:!0}}:b||{meta:{paused:!1}}},this.paused=function(){return f},this.pause=function(){f=!0,n.abort(),t=k(e.chunk)?"":t.substring(n.getCharIndex())},this.resume=function(){u.streamer._halted?(f=!1,u.streamer.parseChunk(t,!0)):setTimeout(u.resume,3)},this.aborted=function(){return p},this.abort=function(){p=!0,n.abort(),b.meta.aborted=!0,k(e.complete)&&e.complete(b),t=""}}function h(e){return e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function m(e){var t,n=(e=e||{}).delimiter,r=e.newline,i=e.comments,s=e.step,a=e.preview,l=e.fastMode,u=t=void 0===e.quoteChar?'"':e.quoteChar;if(void 0!==e.escapeChar&&(u=e.escapeChar),("string"!=typeof n||-1<o.BAD_DELIMITERS.indexOf(n))&&(n=","),i===n)throw new Error("Comment character same as delimiter");!0===i?i="#":("string"!=typeof i||-1<o.BAD_DELIMITERS.indexOf(i))&&(i=!1),"\n"!==r&&"\r"!==r&&"\r\n"!==r&&(r="\n");var c=0,d=!1;this.parse=function(e,o,f){if("string"!=typeof e)throw new Error("Input must be a string");var p=e.length,m=n.length,g=r.length,b=i.length,v=k(s),y=[],_=[],x=[],w=c=0;if(!e)return I();if(l||!1!==l&&-1===e.indexOf(t)){for(var C=e.split(r),E=0;E<C.length;E++){if(x=C[E],c+=x.length,E!==C.length-1)c+=r.length;else if(f)return I();if(!i||x.substring(0,b)!==i){if(v){if(y=[],j(x.split(n)),q(),d)return I()}else j(x.split(n));if(a&&a<=E)return y=y.slice(0,a),I(!0)}}return I()}for(var R=e.indexOf(n,c),$=e.indexOf(r,c),S=new RegExp(h(u)+h(t),"g"),T=e.indexOf(t,c);;)if(e[c]!==t)if(i&&0===x.length&&e.substring(c,c+b)===i){if(-1===$)return I();c=$+g,$=e.indexOf(r,c),R=e.indexOf(n,c)}else if(-1!==R&&(R<$||-1===$))x.push(e.substring(c,R)),c=R+m,R=e.indexOf(n,c);else{if(-1===$)break;if(x.push(e.substring(c,$)),M($+g),v&&(q(),d))return I();if(a&&y.length>=a)return I(!0)}else for(T=c,c++;;){if(-1===(T=e.indexOf(t,T+1)))return f||_.push({type:"Quotes",code:"MissingQuotes",message:"Quoted field unterminated",row:y.length,index:c}),D();if(T===p-1)return D(e.substring(c,T).replace(S,t));if(t!==u||e[T+1]!==u){if(t===u||0===T||e[T-1]!==u){-1!==R&&R<T+1&&(R=e.indexOf(n,T+1)),-1!==$&&$<T+1&&($=e.indexOf(r,T+1));var O=L(-1===$?R:Math.min(R,$));if(e[T+1+O]===n){x.push(e.substring(c,T).replace(S,t)),e[c=T+1+O+m]!==t&&(T=e.indexOf(t,c)),R=e.indexOf(n,c),$=e.indexOf(r,c);break}var A=L($);if(e.substring(T+1+A,T+1+A+g)===r){if(x.push(e.substring(c,T).replace(S,t)),M(T+1+A+g),R=e.indexOf(n,c),T=e.indexOf(t,c),v&&(q(),d))return I();if(a&&y.length>=a)return I(!0);break}_.push({type:"Quotes",code:"InvalidQuotes",message:"Trailing quote on quoted field is malformed",row:y.length,index:c}),T++}}else T++}return D();function j(e){y.push(e),w=c}function L(t){var n=0;if(-1!==t){var r=e.substring(T+1,t);r&&""===r.trim()&&(n=r.length)}return n}function D(t){return f||(void 0===t&&(t=e.substring(c)),x.push(t),c=p,j(x),v&&q()),I()}function M(t){c=t,j(x),x=[],$=e.indexOf(r,c)}function I(e){return{data:y,errors:_,meta:{delimiter:n,linebreak:r,aborted:d,truncated:!!e,cursor:w+(o||0)}}}function q(){s(I()),y=[],_=[]}},this.abort=function(){d=!0},this.getCharIndex=function(){return c}}function g(e){var t=e.data,n=i[t.workerId],r=!1;if(t.error)n.userError(t.error,t.file);else if(t.results&&t.results.data){var s={abort:function(){r=!0,b(t.workerId,{data:[],errors:[],meta:{aborted:!0}})},pause:v,resume:v};if(k(n.userStep)){for(var o=0;o<t.results.data.length&&(n.userStep({data:t.results.data[o],errors:t.results.errors,meta:t.results.meta},s),!r);o++);delete t.results}else k(n.userChunk)&&(n.userChunk(t.results,s,t.file),delete t.results)}t.finished&&!r&&b(t.workerId,t.results)}function b(e,t){var n=i[e];k(n.userComplete)&&n.userComplete(t),n.terminate(),delete i[e]}function v(){throw new Error("Not implemented.")}function y(e){if("object"!=typeof e||null===e)return e;var t=Array.isArray(e)?[]:{};for(var n in e)t[n]=y(e[n]);return t}function _(e,t){return function(){e.apply(t,arguments)}}function k(e){return"function"==typeof e}return r&&(t.onmessage=function(e){var n=e.data;if(void 0===o.WORKER_ID&&n&&(o.WORKER_ID=n.workerId),"string"==typeof n.input)t.postMessage({workerId:o.WORKER_ID,results:o.parse(n.input,n.config),finished:!0});else if(t.File&&n.input instanceof File||n.input instanceof Object){var r=o.parse(n.input,n.config);r&&t.postMessage({workerId:o.WORKER_ID,results:r,finished:!0})}}),(u.prototype=Object.create(l.prototype)).constructor=u,(c.prototype=Object.create(l.prototype)).constructor=c,(d.prototype=Object.create(d.prototype)).constructor=d,(f.prototype=Object.create(l.prototype)).constructor=f,o}()},de(fe={exports:{}},fe.exports),fe.exports);function he(e){let t,n,r,i;const o=e[6].default,l=function(e,t,n,r){if(e){const i=a(e,t,n,r);return e[0](i)}}(o,e,e[5],null);return{c(){t=y("button"),l&&l.c(),w(t,"class","btn btn-outline-primary")},m(o,a){b(o,t,a),l&&l.m(t,null),n=!0,r||(i=x(t,"click",(function(){s(e[3](e[0],e[1],e[2]))&&e[3](e[0],e[1],e[2]).apply(this,arguments)})),r=!0)},p(t,[r]){e=t,l&&l.p&&(!n||32&r)&&function(e,t,n,r,i,s){if(i){const o=a(t,n,r,s);e.p(o,i)}}(l,o,e,e[5],n?function(e,t,n,r){if(e[2]&&r){const i=e[2](r(n));if(void 0===t.dirty)return i;if("object"==typeof i){const e=[],n=Math.max(t.dirty.length,i.length);for(let r=0;r<n;r+=1)e[r]=t.dirty[r]|i[r];return e}return t.dirty|i}return t.dirty}(o,e[5],r,null):function(e){if(e.ctx.length>32){const t=[],n=e.ctx.length/32;for(let e=0;e<n;e++)t[e]=-1;return t}return-1}(e[5]),null)},i(e){n||(Z(l,e),n=!0)},o(e){Y(l,e),n=!1},d(e){e&&v(t),l&&l.d(e),r=!1,i()}}}function me(e,t,n){let{$$slots:r={},$$scope:i}=t,{data:s}=t,{filename:o="filename"}=t,{type:a="link"}=t,{bom:l=2}=t;return e.$$set=e=>{"data"in e&&n(0,s=e.data),"filename"in e&&n(1,o=e.filename),"type"in e&&n(4,a=e.type),"bom"in e&&n(2,l=e.bom),"$$scope"in e&&n(5,i=e.$$scope)},[s,o,l,function(e,t,n){const r=n?"\ufeff":"";let i=null;i="object"==typeof e?pe.unparse(e):e;const s=new Blob([`${r}${i}`],{type:"text/csv;charset=utf-8;"});let o=null;o=navigator.msSaveBlob?navigator.msSaveBlob(s,`${t}.csv`):window.URL.createObjectURL(s);const a=document.createElement("a");a.href=o,a.setAttribute("download",`${t}.csv`),a.click(),a.remove()},a,i,r]}class ge extends ae{constructor(e){super(),oe(this,e,me,he,o,{data:0,filename:1,type:4,bom:2})}}const be="je ne souhaite pas déménager aujourd'hui.";function ve(t){let n;return{c(){n=y("div"),n.innerHTML='<h3 class="pb-3 border-bottom border-primary">A propos</h3> \n    <p class="lead">Aucune données n&#39;a été récoltés sur vos choix de réponses. Il y a juste un Google Analytics qui me permet d&#39;avoir des data sur le taux de transformation de ce questionnaire</p> \n    <p class="lead">Ce questionnaire a été programmé grace à <a href="https://svelte.dev/">Svelte</a>.</p> \n    <p class="lead">Vous pouvez retrouver le code source sur <a href="https://github.com/giraud-d/SD-DHT-arduino">Github</a></p>',w(n,"class","row mt-5")},m(e,t){b(e,n,t)},p:e,i:e,o:e,d(e){e&&v(n)}}}class ye extends ae{constructor(e){super(),oe(this,e,null,ve,o,{})}}function _e(e){let t,n,r,s,o,a,l,u,c,d,f,p,m,g,_=e[1]&&ke();return{c(){t=y("div"),n=y("h1"),n.textContent="Bonjour",r=k(),s=y("div"),o=y("p"),o.textContent="Merci de renseigner votre nom ou celui de votre entreprise",a=k(),l=y("input"),u=k(),c=y("button"),c.textContent="Valider",d=k(),_&&_.c(),w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(o,"class","lead"),w(l,"type","text"),w(l,"class","form-control"),w(l,"placeholder","Nom"),w(c,"class","mt-3 btn btn-outline-primary"),w(c,"type","button"),w(s,"class","row")},m(i,f){b(i,t,f),h(t,n),h(t,r),h(t,s),h(s,o),h(s,a),h(s,l),E(l,e[14]),h(s,u),h(s,c),h(s,d),_&&_.m(s,null),p=!0,m||(g=[x(l,"input",e[27]),x(c,"click",e[20])],m=!0)},p(e,t){16384&t[0]&&l.value!==e[14]&&E(l,e[14]),e[1]?_||(_=ke(),_.c(),_.m(s,null)):_&&(_.d(1),_=null)},i(e){p||(f&&f.end(1),p=!0)},o(e){f=te(t,le,{delay:0,duration:500}),p=!1},d(e){e&&v(t),_&&_.d(),e&&f&&f.end(),m=!1,i(g)}}}function ke(e){let t;return{c(){t=y("div"),t.innerHTML="Merci de remplir votre nom<br/>\n                            Aucune donnée n&#39;est conservée sur ce site",w(t,"class","mt-3 alert alert-danger"),w(t,"role","alert")},m(e,n){b(e,t,n)},d(e){e&&v(t)}}}function xe(e){let t,n,r,i,s,o,a,l,u,c,d,f,p,m,g,E,R;return{c(){t=y("div"),n=y("h1"),r=_("Bienvenue "),i=_(e[14]),s=_("!"),o=k(),a=y("div"),l=y("p"),l.textContent="Avant de vous parler un peu plus de moi, je souhaiterais savoir un peu plus ce que\n                        vous me proposer",u=k(),c=y("p"),c.textContent="Cela vous fera gagner du temps, car si le type d'emploi que vous me proposez ne me\n                        convient pas nous le seront très rapidement.",d=k(),f=y("button"),f.textContent="Commencer (2~5 min)",w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(l,"class","lead"),w(c,"class","lead"),w(f,"type","button"),w(f,"class","mt-3 btn btn-outline-primary"),w(a,"class","row")},m(p,m){b(p,t,m),h(t,n),h(n,r),h(n,i),h(n,s),h(t,o),h(t,a),h(a,l),h(a,u),h(a,c),h(a,d),h(a,f),g=!0,E||(R=x(f,"click",e[21]),E=!0)},p(e,t){(!g||16384&t[0])&&C(i,e[14])},i(e){g||(z((()=>{m&&m.end(1),p=ee(t,le,{delay:500,duration:1e3}),p.start()})),g=!0)},o(e){p&&p.invalidate(),m=te(t,le,{delay:0,duration:500}),g=!1},d(e){e&&v(t),e&&m&&m.end(),E=!1,R()}}}function we(t){let n,r,s,o,a,l,u,c,d,f,p,m,g,_,C,E;return{c(){n=y("div"),r=y("h1"),r.textContent="Quel est votre secteur d'activité ?",s=k(),o=y("p"),o.innerHTML="<i>La matrice utilisée ici, pour classer les secteurs d&#39;activités, est totalement\n                    subjective et n&#39;a pas vocation à stigmatiser qui que ce soit.</i>",a=k(),l=y("div"),u=y("button"),u.textContent="Economie\n                        Sociale & Solidaire, Transition Ecologique, Social, Service Publique, ...",c=k(),d=y("button"),d.textContent="Banque, Finance,\n                        Energie Fossile, Armement, Tourisme de masse, ...",f=k(),p=y("button"),p.textContent="Autre",w(r,"class","pb-4 mb-5 border-bottom border-primary"),w(o,"class","lead"),w(u,"class","btn btn-outline-primary"),w(d,"class","btn btn-outline-primary"),w(p,"class","btn btn-outline-primary"),w(l,"class","d-grid gap-lg-4 col-12 mx-auto")},m(e,i){b(e,n,i),h(n,r),h(n,s),h(n,o),h(n,a),h(n,l),h(l,u),h(l,c),h(l,d),h(l,f),h(l,p),_=!0,C||(E=[x(u,"click",t[28]),x(d,"click",t[29]),x(p,"click",t[30])],C=!0)},p:e,i(e){_||(z((()=>{g&&g.end(1),m=ee(n,le,{delay:500,duration:1e3}),m.start()})),_=!0)},o(e){m&&m.invalidate(),g=te(n,le,{delay:0,duration:500}),_=!1},d(e){e&&v(n),e&&g&&g.end(),C=!1,i(E)}}}function Ce(t){let n,r,s,o,a,l,u,c,d,f,p,m,g,_;return{c(){n=y("div"),r=y("h1"),r.textContent="Quel type de contrat ?",s=k(),o=y("div"),a=y("button"),a.textContent="Temps plein",l=k(),u=y("button"),u.textContent="Temps partiel",c=k(),d=y("button"),d.textContent="Freelance",w(r,"class","pb-4 mb-5 border-bottom border-primary"),w(a,"class","btn btn-outline-primary"),w(u,"class","btn btn-outline-primary"),w(d,"class","btn btn-outline-primary"),w(o,"class","d-grid gap-sm-4 col-12 mx-auto")},m(e,i){b(e,n,i),h(n,r),h(n,s),h(n,o),h(o,a),h(o,l),h(o,u),h(o,c),h(o,d),m=!0,g||(_=[x(a,"click",t[31]),x(u,"click",t[32]),x(d,"click",t[33])],g=!0)},p:e,i(e){m||(z((()=>{p&&p.end(1),f=ee(n,le,{delay:500,duration:1e3}),f.start()})),m=!0)},o(e){f&&f.invalidate(),p=te(n,le,{delay:0,duration:500}),m=!1},d(e){e&&v(n),e&&p&&p.end(),g=!1,i(_)}}}function Ee(e){let t,n,r,s,o,a,l,u,c,d,f,p,m,g,R,$,S,T,O,A,j,L,D=e[16]===ce.PART_TIME&&Re();return{c(){t=y("div"),n=y("h1"),n.textContent="Quel est votre politique de télétravail ?",r=k(),s=y("div"),o=y("p"),o.innerHTML="Il s&#39;agit d&#39;une <b>moyenne hebdomadaire</b> du nombre de <b>journées\n                        télétravaillées</b>",a=k(),l=y("p"),l.innerHTML="<i>Si par exemple vous travaillez avec des sprints de trois semaines et que vous\n                        souhaitez que l&#39;équipe se réunisse deux jours consécutifs pour des cérémonies vous pouvez\n                        sélectionner 4j/5</i>",u=k(),D&&D.c(),c=k(),d=y("input"),f=k(),p=y("p"),m=y("b"),g=_(e[6]),R=_(" jours de télétravail"),$=k(),S=y("button"),S.textContent="Valider",w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(o,"class","lead"),w(l,"class","lead"),w(d,"type","range"),w(d,"min","0"),w(d,"max","5"),w(p,"class","lead"),w(S,"class","btn btn-outline-primary"),w(s,"class","row")},m(i,v){b(i,t,v),h(t,n),h(t,r),h(t,s),h(s,o),h(s,a),h(s,l),h(s,u),D&&D.m(s,null),h(s,c),h(s,d),E(d,e[6]),h(s,f),h(s,p),h(p,m),h(m,g),h(m,R),h(s,$),h(s,S),A=!0,j||(L=[x(d,"change",e[34]),x(d,"input",e[34]),x(S,"click",e[35])],j=!0)},p(e,t){e[16]===ce.PART_TIME?D||(D=Re(),D.c(),D.m(s,c)):D&&(D.d(1),D=null),64&t[0]&&E(d,e[6]),(!A||64&t[0])&&C(g,e[6])},i(e){A||(z((()=>{O&&O.end(1),T=ee(t,le,{delay:500,duration:1e3}),T.start()})),A=!0)},o(e){T&&T.invalidate(),O=te(t,le,{delay:0,duration:500}),A=!1},d(e){e&&v(t),D&&D.d(),e&&O&&O.end(),j=!1,i(L)}}}function Re(e){let t;return{c(){t=y("div"),t.innerHTML="Cas particulier du temps partiel : Merci de faire au prorata sur une semaine de 5j\n                            <i>(désolé je n&#39;ai pas codé ce cas particulier #80/20)</i>",w(t,"class","mt-3 alert alert-warning"),w(t,"role","alert")},m(e,n){b(e,t,n)},d(e){e&&v(t)}}}function $e(e){let t,n,r,s,o,a,l,u,c,d,f,p,m,g,_,C,R,$,S,T,O,A=e[8]&&Se();return{c(){t=y("div"),n=y("h1"),n.textContent="Localisation",r=k(),s=y("div"),o=y("div"),a=y("div"),l=y("button"),l.textContent="Département de Loire-Atlantique",u=k(),c=y("div"),d=y("div"),f=y("p"),f.textContent="Si vous n'êtes pas dans le département de Loire-Atlantique merci de préciser\n                                l'emplacement des bureaux",p=k(),m=y("input"),g=k(),_=y("button"),_.textContent="Valider",C=k(),A&&A.c(),w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(l,"class","btn btn-outline-primary"),w(a,"class","row"),w(o,"class","col-6"),w(f,"class","lead"),w(m,"class","form-control mt-4"),w(m,"placeholder","Ville, Pays"),w(m,"type","text"),w(_,"class","mt-3 btn btn-outline-primary"),w(_,"type","button"),w(d,"class","row"),w(c,"class","col-6"),w(s,"class","row")},m(i,v){b(i,t,v),h(t,n),h(t,r),h(t,s),h(s,o),h(o,a),h(a,l),h(s,u),h(s,c),h(c,d),h(d,f),h(d,p),h(d,m),E(m,e[18]),h(d,g),h(d,_),h(d,C),A&&A.m(d,null),S=!0,T||(O=[x(l,"click",e[36]),x(m,"input",e[37]),x(_,"click",e[38])],T=!0)},p(e,t){262144&t[0]&&m.value!==e[18]&&E(m,e[18]),e[8]?A||(A=Se(),A.c(),A.m(d,null)):A&&(A.d(1),A=null)},i(e){S||(z((()=>{$&&$.end(1),R=ee(t,le,{delay:500,duration:1e3}),R.start()})),S=!0)},o(e){R&&R.invalidate(),$=te(t,le,{delay:0,duration:500}),S=!1},d(e){e&&v(t),A&&A.d(),e&&$&&$.end(),T=!1,i(O)}}}function Se(e){let t;return{c(){t=y("div"),t.textContent="Merci de renseigner un lieu",w(t,"class","mt-3 alert alert-danger"),w(t,"role","alert")},m(e,n){b(e,t,n)},d(e){e&&v(t)}}}function Te(e){let t,n,r,s,o,a,l,u,c,d,f,p,m,g,E,R,$,S,T,O,A;return{c(){t=y("div"),n=y("h1"),n.textContent="Tension : Localisation/Télétravail",r=k(),s=y("div"),o=y("p"),a=_("Votre bureau est en dehors de mon département et vous me proposer en\n                        moyenne "),l=_(e[17]),u=_(" jours de télétravail par semaines"),c=k(),d=y("p"),d.textContent="Je ne souhaite pas déménager, ni passer beaucoup de temps dans les transports.",f=k(),p=y("p"),p.textContent="Consentez-vous à passer en moyenne quatre jours de télétravail par semaine ?",m=k(),g=y("button"),g.textContent="Oui",E=k(),R=y("button"),R.textContent="Non",w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(o,"class","lead"),w(d,"class","lead"),w(p,"class","lead"),w(g,"class","col-4 m-3 btn btn-outline-primary"),w(R,"class","col-4 m-3 btn btn-outline-primary"),w(s,"class","row justify-content-center")},m(i,v){b(i,t,v),h(t,n),h(t,r),h(t,s),h(s,o),h(o,a),h(o,l),h(o,u),h(s,c),h(s,d),h(s,f),h(s,p),h(s,m),h(s,g),h(s,E),h(s,R),T=!0,O||(A=[x(g,"click",e[39]),x(R,"click",e[40])],O=!0)},p(e,t){(!T||131072&t[0])&&C(l,e[17])},i(e){T||(z((()=>{S&&S.end(1),$=ee(t,le,{delay:500,duration:1e3}),$.start()})),T=!0)},o(e){$&&$.invalidate(),S=te(t,le,{delay:0,duration:500}),T=!1},d(e){e&&v(t),e&&S&&S.end(),O=!1,i(A)}}}function Oe(e){let t,n,r,i,s,o,a,l,u,c,d,f,p,m;return u=new ge({props:{data:[{employerName:e[14],sector:e[15],contract:e[16],remote:e[17],loaction:e[18],locationRemoteDilemma:e[19]}],type:"button",filename:"filename",bom:!0,$$slots:{default:[Ae]},$$scope:{ctx:e}}}),{c(){t=y("div"),n=y("h1"),r=_("Merci "),i=_(e[14]),s=k(),o=y("div"),a=y("p"),a.textContent="Le questionnaire se clot ici. Pour me contacter merci de télécharger le fichier CSV\n                        ci dessous",l=k(),ne(u.$$.fragment),c=k(),d=y("div"),d.innerHTML='<p class="lead">Pour prendre contact merci de m&#39;envoyer un courriel à :</p> \n                        <div class="col-5"><h6 class="pb-2 my-3 border-bottom border-primary">Méthode Semi-Auto</h6> \n                            <div class="row"><a class="btn btn-outline-primary" href="mailto:damien@giraudet.me?subject=[job-success]">Lien mailto</a> \n                                <p class="text-sm-start mt-3"><kbd>avec le fichier .csv en pièce jointe</kbd></p></div></div> \n                        <div class="col-7"><h6 class="pb-2 my-3 border-bottom border-primary">Méthode Manuelle</h6> \n                            <p class="text-justify"><kbd>damien@giraudet.me</kbd> avec comme préfixe à votre objet\n                                <kbd>[job-success]</kbd>.</p> \n                            <p class="text-justify">C&#39;est important de bien mettre ce préfixe à votre objet et\n                                <kbd>avec le fichier .csv en pièce jointe</kbd> sinon\n                                <del>je</del>\n                                mon automatisation ne traitera pas le courriel.</p></div>',w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(a,"class","lead"),w(d,"class","row mt-5"),w(o,"class","row")},m(e,f){b(e,t,f),h(t,n),h(n,r),h(n,i),h(t,s),h(t,o),h(o,a),h(o,l),re(u,o,null),h(o,c),h(o,d),m=!0},p(e,t){(!m||16384&t[0])&&C(i,e[14]);const n={};1032192&t[0]&&(n.data=[{employerName:e[14],sector:e[15],contract:e[16],remote:e[17],loaction:e[18],locationRemoteDilemma:e[19]}]),4096&t[1]&&(n.$$scope={dirty:t,ctx:e}),u.$set(n)},i(e){m||(Z(u.$$.fragment,e),z((()=>{p&&p.end(1),f=ee(t,le,{delay:500,duration:1e3}),f.start()})),m=!0)},o(e){Y(u.$$.fragment,e),f&&f.invalidate(),p=te(t,le,{delay:0,duration:500}),m=!1},d(e){e&&v(t),ie(u),e&&p&&p.end()}}}function Ae(e){let t;return{c(){t=_("Télécharger le fichier")},m(e,n){b(e,t,n)},d(e){e&&v(t)}}}function je(e){let t,n,r,i,s,o,a,l,u,c,d,f,p,m,g,x,E,R;return x=new ye({}),{c(){t=y("div"),n=y("h1"),n.textContent="Fin du voyage",r=k(),i=y("div"),s=y("p"),o=_("Merci "),a=_(e[14]),l=_(" d'avoir répondu à ces question."),u=k(),c=y("p"),d=_("Nous ne pourons pas travailler ensemble car "),f=_(e[11]),p=k(),m=y("div"),m.innerHTML='<p class="text-sm-start">Si malgrès tout vous pensez que nous pourrions tout de même travailler\n                            ensemble vous pouvez m&#39;envoyer un courriel à :</p> \n                        <div class="col-4"><h6 class="pb-2 my-3 border-bottom border-primary">Méthode Auto</h6> \n                            <div class="row"><a class="btn btn-outline-primary" href="mailto:damien@giraudet.me?subject=[job-retry]">Lien mailto</a></div></div> \n                        <div class="col-8"><h6 class="pb-2 my-3 border-bottom border-primary">Méthode Manuelle</h6> \n                            <p class="text-justify"><kbd>damien@giraudet.me</kbd> avec comme préfixe de votre objet\n                                <kbd>[job-retry]</kbd>.</p> \n                            <p class="text-justify">C&#39;est important de bien mettre ce préfixe à votre objet sinon\n                                <del>je</del>\n                                mon automatisation ne traitera pas le courriel.</p></div>',g=k(),ne(x.$$.fragment),w(n,"class","pb-4 mb-5 border-bottom border-primary"),w(s,"class","lead"),w(c,"class","lead"),w(m,"class","row"),w(i,"class","row")},m(e,v){b(e,t,v),h(t,n),h(t,r),h(t,i),h(i,s),h(s,o),h(s,a),h(s,l),h(i,u),h(i,c),h(c,d),h(c,f),h(i,p),h(i,m),h(t,g),re(x,t,null),R=!0},p(e,t){(!R||16384&t[0])&&C(a,e[14]),(!R||2048&t[0])&&C(f,e[11])},i(e){R||(Z(x.$$.fragment,e),E||z((()=>{E=ee(t,le,{delay:500,duration:1e3}),E.start()})),R=!0)},o(e){Y(x.$$.fragment,e),R=!1},d(e){e&&v(t),ie(x)}}}function Le(e){let t,n,r,i,s,o,a,l,u,c,d,f,p,m,g,_=e[0]&&_e(e),x=e[2]&&xe(e),C=e[3]&&we(e),E=e[4]&&Ce(e),$=e[5]&&Ee(e),S=e[7]&&$e(e),T=e[9]&&Te(e),O=e[12]&&Oe(e),A=e[10]&&je(e);return{c(){t=y("div"),n=y("main"),_&&_.c(),r=k(),x&&x.c(),i=k(),C&&C.c(),s=k(),E&&E.c(),o=k(),$&&$.c(),a=k(),S&&S.c(),l=k(),T&&T.c(),u=k(),O&&O.c(),c=k(),A&&A.c(),d=k(),f=y("footer"),p=y("div"),m=y("div"),w(n,"class","3px"),w(m,"class","progress-bar progress-bar-striped"),w(m,"role","progressbar"),R(m,"width",e[13]+"%"),w(m,"aria-valuenow",e[13]),w(m,"aria-valuemin","0"),w(m,"aria-valuemax","100"),w(p,"class","progress"),w(f,"class","mt-auto text-white-50"),w(t,"class","cover-container d-flex w-100 h-100 p-3 mx-auto flex-column")},m(e,v){b(e,t,v),h(t,n),_&&_.m(n,null),h(n,r),x&&x.m(n,null),h(n,i),C&&C.m(n,null),h(n,s),E&&E.m(n,null),h(n,o),$&&$.m(n,null),h(n,a),S&&S.m(n,null),h(n,l),T&&T.m(n,null),h(n,u),O&&O.m(n,null),h(n,c),A&&A.m(n,null),h(t,d),h(t,f),h(f,p),h(p,m),g=!0},p(e,t){e[0]?_?(_.p(e,t),1&t[0]&&Z(_,1)):(_=_e(e),_.c(),Z(_,1),_.m(n,r)):_&&(V(),Y(_,1,1,(()=>{_=null})),J()),e[2]?x?(x.p(e,t),4&t[0]&&Z(x,1)):(x=xe(e),x.c(),Z(x,1),x.m(n,i)):x&&(V(),Y(x,1,1,(()=>{x=null})),J()),e[3]?C?(C.p(e,t),8&t[0]&&Z(C,1)):(C=we(e),C.c(),Z(C,1),C.m(n,s)):C&&(V(),Y(C,1,1,(()=>{C=null})),J()),e[4]?E?(E.p(e,t),16&t[0]&&Z(E,1)):(E=Ce(e),E.c(),Z(E,1),E.m(n,o)):E&&(V(),Y(E,1,1,(()=>{E=null})),J()),e[5]?$?($.p(e,t),32&t[0]&&Z($,1)):($=Ee(e),$.c(),Z($,1),$.m(n,a)):$&&(V(),Y($,1,1,(()=>{$=null})),J()),e[7]?S?(S.p(e,t),128&t[0]&&Z(S,1)):(S=$e(e),S.c(),Z(S,1),S.m(n,l)):S&&(V(),Y(S,1,1,(()=>{S=null})),J()),e[9]?T?(T.p(e,t),512&t[0]&&Z(T,1)):(T=Te(e),T.c(),Z(T,1),T.m(n,u)):T&&(V(),Y(T,1,1,(()=>{T=null})),J()),e[12]?O?(O.p(e,t),4096&t[0]&&Z(O,1)):(O=Oe(e),O.c(),Z(O,1),O.m(n,c)):O&&(V(),Y(O,1,1,(()=>{O=null})),J()),e[10]?A?(A.p(e,t),1024&t[0]&&Z(A,1)):(A=je(e),A.c(),Z(A,1),A.m(n,null)):A&&(V(),Y(A,1,1,(()=>{A=null})),J()),(!g||8192&t[0])&&R(m,"width",e[13]+"%"),(!g||8192&t[0])&&w(m,"aria-valuenow",e[13])},i(e){g||(Z(_),Z(x),Z(C),Z(E),Z($),Z(S),Z(T),Z(O),Z(A),g=!0)},o(e){Y(_),Y(x),Y(C),Y(E),Y($),Y(S),Y(T),Y(O),Y(A),g=!1},d(e){e&&v(t),_&&_.d(),x&&x.d(),C&&C.d(),E&&E.d(),$&&$.d(),S&&S.d(),T&&T.d(),O&&O.d(),A&&A.d()}}}function De(e,t,n){let r,i,s,o,a,l,u=!0,c=!1,d=!1,f=!1,p=!1,h=!1,m=3,g=!1,b=!1,v=!1,y=!1,_="",k=!1,x=0;function w(){n(13,x+=100/6)}function C(e){n(11,_=e),n(10,y=!0),n(13,x=100)}function E(e){n(15,i=e),n(3,f=!1),e===ue.GOOD||e===ue.NEUTRAL?(n(3,f=!1),n(4,p=!0),w()):C("je crois profondément que pour bien travailler il faut croire en ce que l'on fait.\nMalheureusement, ce secteur d'activités ne correspond pas à mes valeurs.")}function R(e){n(16,s=e),n(4,p=!1),n(5,h=!0),console.log(s),w()}function $(e){n(17,o=e),n(5,h=!1),n(7,g=!0),w()}function S(e){!e||"44"!==e&&e.length<3?n(8,b=!0):(n(18,a=e),n(7,g=!1),"44"!==e&&o<2?C(be):"44"!==e&&o<4?(n(19,l=!0),n(9,v=!0)):(n(12,k=!0),w()))}function T(e){n(9,v=!1),e?(n(17,o=4),n(12,k=!0),w()):C("je ne souhaite pas déménager aujourd'hui.\nle nombre de journées que vous proposez en télétravail m'obligerai à passer beaucoup de temps dans les tra,sports.")}return[u,c,d,f,p,h,m,g,b,v,y,_,k,x,r,i,s,o,a,l,function(){!r||r.length<3?n(1,c=!0):(n(0,u=!1),n(2,d=!0),w())},function(){n(2,d=!1),n(3,f=!0),w()},E,R,$,S,T,function(){r=this.value,n(14,r)},()=>E(ue.GOOD),()=>E(ue.BAD),()=>E(ue.NEUTRAL),()=>R(ce.FULL_TIME),()=>R(ce.PART_TIME),()=>R(ce.FREELANCE),function(){var e;e=this.value,m=""===e?null:+e,n(6,m)},()=>$(m),()=>S("44"),function(){a=this.value,n(18,a)},()=>S(a),()=>T(!0),()=>T(!1)]}return new class extends ae{constructor(e){super(),oe(this,e,De,Le,o,{},null,[-1,-1])}}({target:document.body})}();
+
+    var papaparse_min = createCommonjsModule(function (module, exports) {
+    !function(e,t){module.exports=t();}(commonjsGlobal,function s(){var f="undefined"!=typeof self?self:"undefined"!=typeof window?window:void 0!==f?f:{};var n=!f.document&&!!f.postMessage,o=n&&/blob:/i.test((f.location||{}).protocol),a={},h=0,b={parse:function(e,t){var i=(t=t||{}).dynamicTyping||!1;M(i)&&(t.dynamicTypingFunction=i,i={});if(t.dynamicTyping=i,t.transform=!!M(t.transform)&&t.transform,t.worker&&b.WORKERS_SUPPORTED){var r=function(){if(!b.WORKERS_SUPPORTED)return !1;var e=(i=f.URL||f.webkitURL||null,r=s.toString(),b.BLOB_URL||(b.BLOB_URL=i.createObjectURL(new Blob(["(",r,")();"],{type:"text/javascript"})))),t=new f.Worker(e);var i,r;return t.onmessage=_,t.id=h++,a[t.id]=t}();return r.userStep=t.step,r.userChunk=t.chunk,r.userComplete=t.complete,r.userError=t.error,t.step=M(t.step),t.chunk=M(t.chunk),t.complete=M(t.complete),t.error=M(t.error),delete t.worker,void r.postMessage({input:e,config:t,workerId:r.id})}var n=null;b.NODE_STREAM_INPUT,"string"==typeof e?n=t.download?new l(t):new p(t):!0===e.readable&&M(e.read)&&M(e.on)?n=new g(t):(f.File&&e instanceof File||e instanceof Object)&&(n=new c(t));return n.stream(e)},unparse:function(e,t){var n=!1,_=!0,m=",",y="\r\n",s='"',a=s+s,i=!1,r=null,o=!1;!function(){if("object"!=typeof t)return;"string"!=typeof t.delimiter||b.BAD_DELIMITERS.filter(function(e){return -1!==t.delimiter.indexOf(e)}).length||(m=t.delimiter);("boolean"==typeof t.quotes||"function"==typeof t.quotes||Array.isArray(t.quotes))&&(n=t.quotes);"boolean"!=typeof t.skipEmptyLines&&"string"!=typeof t.skipEmptyLines||(i=t.skipEmptyLines);"string"==typeof t.newline&&(y=t.newline);"string"==typeof t.quoteChar&&(s=t.quoteChar);"boolean"==typeof t.header&&(_=t.header);if(Array.isArray(t.columns)){if(0===t.columns.length)throw new Error("Option columns is empty");r=t.columns;}void 0!==t.escapeChar&&(a=t.escapeChar+s);"boolean"==typeof t.escapeFormulae&&(o=t.escapeFormulae);}();var h=new RegExp(j(s),"g");"string"==typeof e&&(e=JSON.parse(e));if(Array.isArray(e)){if(!e.length||Array.isArray(e[0]))return u(null,e,i);if("object"==typeof e[0])return u(r||Object.keys(e[0]),e,i)}else if("object"==typeof e)return "string"==typeof e.data&&(e.data=JSON.parse(e.data)),Array.isArray(e.data)&&(e.fields||(e.fields=e.meta&&e.meta.fields),e.fields||(e.fields=Array.isArray(e.data[0])?e.fields:"object"==typeof e.data[0]?Object.keys(e.data[0]):[]),Array.isArray(e.data[0])||"object"==typeof e.data[0]||(e.data=[e.data])),u(e.fields||[],e.data||[],i);throw new Error("Unable to serialize unrecognized input");function u(e,t,i){var r="";"string"==typeof e&&(e=JSON.parse(e)),"string"==typeof t&&(t=JSON.parse(t));var n=Array.isArray(e)&&0<e.length,s=!Array.isArray(t[0]);if(n&&_){for(var a=0;a<e.length;a++)0<a&&(r+=m),r+=v(e[a],a);0<t.length&&(r+=y);}for(var o=0;o<t.length;o++){var h=n?e.length:t[o].length,u=!1,f=n?0===Object.keys(t[o]).length:0===t[o].length;if(i&&!n&&(u="greedy"===i?""===t[o].join("").trim():1===t[o].length&&0===t[o][0].length),"greedy"===i&&n){for(var d=[],l=0;l<h;l++){var c=s?e[l]:l;d.push(t[o][c]);}u=""===d.join("").trim();}if(!u){for(var p=0;p<h;p++){0<p&&!f&&(r+=m);var g=n&&s?e[p]:p;r+=v(t[o][g],p);}o<t.length-1&&(!i||0<h&&!f)&&(r+=y);}}return r}function v(e,t){if(null==e)return "";if(e.constructor===Date)return JSON.stringify(e).slice(1,25);!0===o&&"string"==typeof e&&null!==e.match(/^[=+\-@].*$/)&&(e="'"+e);var i=e.toString().replace(h,a),r="boolean"==typeof n&&n||"function"==typeof n&&n(e,t)||Array.isArray(n)&&n[t]||function(e,t){for(var i=0;i<t.length;i++)if(-1<e.indexOf(t[i]))return !0;return !1}(i,b.BAD_DELIMITERS)||-1<i.indexOf(m)||" "===i.charAt(0)||" "===i.charAt(i.length-1);return r?s+i+s:i}}};if(b.RECORD_SEP=String.fromCharCode(30),b.UNIT_SEP=String.fromCharCode(31),b.BYTE_ORDER_MARK="\ufeff",b.BAD_DELIMITERS=["\r","\n",'"',b.BYTE_ORDER_MARK],b.WORKERS_SUPPORTED=!n&&!!f.Worker,b.NODE_STREAM_INPUT=1,b.LocalChunkSize=10485760,b.RemoteChunkSize=5242880,b.DefaultDelimiter=",",b.Parser=E,b.ParserHandle=i,b.NetworkStreamer=l,b.FileStreamer=c,b.StringStreamer=p,b.ReadableStreamStreamer=g,f.jQuery){var d=f.jQuery;d.fn.parse=function(o){var i=o.config||{},h=[];return this.each(function(e){if(!("INPUT"===d(this).prop("tagName").toUpperCase()&&"file"===d(this).attr("type").toLowerCase()&&f.FileReader)||!this.files||0===this.files.length)return !0;for(var t=0;t<this.files.length;t++)h.push({file:this.files[t],inputElem:this,instanceConfig:d.extend({},i)});}),e(),this;function e(){if(0!==h.length){var e,t,i,r,n=h[0];if(M(o.before)){var s=o.before(n.file,n.inputElem);if("object"==typeof s){if("abort"===s.action)return e="AbortError",t=n.file,i=n.inputElem,r=s.reason,void(M(o.error)&&o.error({name:e},t,i,r));if("skip"===s.action)return void u();"object"==typeof s.config&&(n.instanceConfig=d.extend(n.instanceConfig,s.config));}else if("skip"===s)return void u()}var a=n.instanceConfig.complete;n.instanceConfig.complete=function(e){M(a)&&a(e,n.file,n.inputElem),u();},b.parse(n.file,n.instanceConfig);}else M(o.complete)&&o.complete();}function u(){h.splice(0,1),e();}};}function u(e){this._handle=null,this._finished=!1,this._completed=!1,this._halted=!1,this._input=null,this._baseIndex=0,this._partialLine="",this._rowCount=0,this._start=0,this._nextChunk=null,this.isFirstChunk=!0,this._completeResults={data:[],errors:[],meta:{}},function(e){var t=w(e);t.chunkSize=parseInt(t.chunkSize),e.step||e.chunk||(t.chunkSize=null);this._handle=new i(t),(this._handle.streamer=this)._config=t;}.call(this,e),this.parseChunk=function(e,t){if(this.isFirstChunk&&M(this._config.beforeFirstChunk)){var i=this._config.beforeFirstChunk(e);void 0!==i&&(e=i);}this.isFirstChunk=!1,this._halted=!1;var r=this._partialLine+e;this._partialLine="";var n=this._handle.parse(r,this._baseIndex,!this._finished);if(!this._handle.paused()&&!this._handle.aborted()){var s=n.meta.cursor;this._finished||(this._partialLine=r.substring(s-this._baseIndex),this._baseIndex=s),n&&n.data&&(this._rowCount+=n.data.length);var a=this._finished||this._config.preview&&this._rowCount>=this._config.preview;if(o)f.postMessage({results:n,workerId:b.WORKER_ID,finished:a});else if(M(this._config.chunk)&&!t){if(this._config.chunk(n,this._handle),this._handle.paused()||this._handle.aborted())return void(this._halted=!0);n=void 0,this._completeResults=void 0;}return this._config.step||this._config.chunk||(this._completeResults.data=this._completeResults.data.concat(n.data),this._completeResults.errors=this._completeResults.errors.concat(n.errors),this._completeResults.meta=n.meta),this._completed||!a||!M(this._config.complete)||n&&n.meta.aborted||(this._config.complete(this._completeResults,this._input),this._completed=!0),a||n&&n.meta.paused||this._nextChunk(),n}this._halted=!0;},this._sendError=function(e){M(this._config.error)?this._config.error(e):o&&this._config.error&&f.postMessage({workerId:b.WORKER_ID,error:e,finished:!1});};}function l(e){var r;(e=e||{}).chunkSize||(e.chunkSize=b.RemoteChunkSize),u.call(this,e),this._nextChunk=n?function(){this._readChunk(),this._chunkLoaded();}:function(){this._readChunk();},this.stream=function(e){this._input=e,this._nextChunk();},this._readChunk=function(){if(this._finished)this._chunkLoaded();else {if(r=new XMLHttpRequest,this._config.withCredentials&&(r.withCredentials=this._config.withCredentials),n||(r.onload=v(this._chunkLoaded,this),r.onerror=v(this._chunkError,this)),r.open(this._config.downloadRequestBody?"POST":"GET",this._input,!n),this._config.downloadRequestHeaders){var e=this._config.downloadRequestHeaders;for(var t in e)r.setRequestHeader(t,e[t]);}if(this._config.chunkSize){var i=this._start+this._config.chunkSize-1;r.setRequestHeader("Range","bytes="+this._start+"-"+i);}try{r.send(this._config.downloadRequestBody);}catch(e){this._chunkError(e.message);}n&&0===r.status&&this._chunkError();}},this._chunkLoaded=function(){4===r.readyState&&(r.status<200||400<=r.status?this._chunkError():(this._start+=this._config.chunkSize?this._config.chunkSize:r.responseText.length,this._finished=!this._config.chunkSize||this._start>=function(e){var t=e.getResponseHeader("Content-Range");if(null===t)return -1;return parseInt(t.substring(t.lastIndexOf("/")+1))}(r),this.parseChunk(r.responseText)));},this._chunkError=function(e){var t=r.statusText||e;this._sendError(new Error(t));};}function c(e){var r,n;(e=e||{}).chunkSize||(e.chunkSize=b.LocalChunkSize),u.call(this,e);var s="undefined"!=typeof FileReader;this.stream=function(e){this._input=e,n=e.slice||e.webkitSlice||e.mozSlice,s?((r=new FileReader).onload=v(this._chunkLoaded,this),r.onerror=v(this._chunkError,this)):r=new FileReaderSync,this._nextChunk();},this._nextChunk=function(){this._finished||this._config.preview&&!(this._rowCount<this._config.preview)||this._readChunk();},this._readChunk=function(){var e=this._input;if(this._config.chunkSize){var t=Math.min(this._start+this._config.chunkSize,this._input.size);e=n.call(e,this._start,t);}var i=r.readAsText(e,this._config.encoding);s||this._chunkLoaded({target:{result:i}});},this._chunkLoaded=function(e){this._start+=this._config.chunkSize,this._finished=!this._config.chunkSize||this._start>=this._input.size,this.parseChunk(e.target.result);},this._chunkError=function(){this._sendError(r.error);};}function p(e){var i;u.call(this,e=e||{}),this.stream=function(e){return i=e,this._nextChunk()},this._nextChunk=function(){if(!this._finished){var e,t=this._config.chunkSize;return t?(e=i.substring(0,t),i=i.substring(t)):(e=i,i=""),this._finished=!i,this.parseChunk(e)}};}function g(e){u.call(this,e=e||{});var t=[],i=!0,r=!1;this.pause=function(){u.prototype.pause.apply(this,arguments),this._input.pause();},this.resume=function(){u.prototype.resume.apply(this,arguments),this._input.resume();},this.stream=function(e){this._input=e,this._input.on("data",this._streamData),this._input.on("end",this._streamEnd),this._input.on("error",this._streamError);},this._checkIsFinished=function(){r&&1===t.length&&(this._finished=!0);},this._nextChunk=function(){this._checkIsFinished(),t.length?this.parseChunk(t.shift()):i=!0;},this._streamData=v(function(e){try{t.push("string"==typeof e?e:e.toString(this._config.encoding)),i&&(i=!1,this._checkIsFinished(),this.parseChunk(t.shift()));}catch(e){this._streamError(e);}},this),this._streamError=v(function(e){this._streamCleanUp(),this._sendError(e);},this),this._streamEnd=v(function(){this._streamCleanUp(),r=!0,this._streamData("");},this),this._streamCleanUp=v(function(){this._input.removeListener("data",this._streamData),this._input.removeListener("end",this._streamEnd),this._input.removeListener("error",this._streamError);},this);}function i(m){var a,o,h,r=Math.pow(2,53),n=-r,s=/^\s*-?(\d+\.?|\.\d+|\d+\.\d+)([eE][-+]?\d+)?\s*$/,u=/^(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z))$/,t=this,i=0,f=0,d=!1,e=!1,l=[],c={data:[],errors:[],meta:{}};if(M(m.step)){var p=m.step;m.step=function(e){if(c=e,_())g();else {if(g(),0===c.data.length)return;i+=e.data.length,m.preview&&i>m.preview?o.abort():(c.data=c.data[0],p(c,t));}};}function y(e){return "greedy"===m.skipEmptyLines?""===e.join("").trim():1===e.length&&0===e[0].length}function g(){if(c&&h&&(k("Delimiter","UndetectableDelimiter","Unable to auto-detect delimiting character; defaulted to '"+b.DefaultDelimiter+"'"),h=!1),m.skipEmptyLines)for(var e=0;e<c.data.length;e++)y(c.data[e])&&c.data.splice(e--,1);return _()&&function(){if(!c)return;function e(e,t){M(m.transformHeader)&&(e=m.transformHeader(e,t)),l.push(e);}if(Array.isArray(c.data[0])){for(var t=0;_()&&t<c.data.length;t++)c.data[t].forEach(e);c.data.splice(0,1);}else c.data.forEach(e);}(),function(){if(!c||!m.header&&!m.dynamicTyping&&!m.transform)return c;function e(e,t){var i,r=m.header?{}:[];for(i=0;i<e.length;i++){var n=i,s=e[i];m.header&&(n=i>=l.length?"__parsed_extra":l[i]),m.transform&&(s=m.transform(s,n)),s=v(n,s),"__parsed_extra"===n?(r[n]=r[n]||[],r[n].push(s)):r[n]=s;}return m.header&&(i>l.length?k("FieldMismatch","TooManyFields","Too many fields: expected "+l.length+" fields but parsed "+i,f+t):i<l.length&&k("FieldMismatch","TooFewFields","Too few fields: expected "+l.length+" fields but parsed "+i,f+t)),r}var t=1;!c.data.length||Array.isArray(c.data[0])?(c.data=c.data.map(e),t=c.data.length):c.data=e(c.data,0);m.header&&c.meta&&(c.meta.fields=l);return f+=t,c}()}function _(){return m.header&&0===l.length}function v(e,t){return i=e,m.dynamicTypingFunction&&void 0===m.dynamicTyping[i]&&(m.dynamicTyping[i]=m.dynamicTypingFunction(i)),!0===(m.dynamicTyping[i]||m.dynamicTyping)?"true"===t||"TRUE"===t||"false"!==t&&"FALSE"!==t&&(function(e){if(s.test(e)){var t=parseFloat(e);if(n<t&&t<r)return !0}return !1}(t)?parseFloat(t):u.test(t)?new Date(t):""===t?null:t):t;var i;}function k(e,t,i,r){var n={type:e,code:t,message:i};void 0!==r&&(n.row=r),c.errors.push(n);}this.parse=function(e,t,i){var r=m.quoteChar||'"';if(m.newline||(m.newline=function(e,t){e=e.substring(0,1048576);var i=new RegExp(j(t)+"([^]*?)"+j(t),"gm"),r=(e=e.replace(i,"")).split("\r"),n=e.split("\n"),s=1<n.length&&n[0].length<r[0].length;if(1===r.length||s)return "\n";for(var a=0,o=0;o<r.length;o++)"\n"===r[o][0]&&a++;return a>=r.length/2?"\r\n":"\r"}(e,r)),h=!1,m.delimiter)M(m.delimiter)&&(m.delimiter=m.delimiter(e),c.meta.delimiter=m.delimiter);else {var n=function(e,t,i,r,n){var s,a,o,h;n=n||[",","\t","|",";",b.RECORD_SEP,b.UNIT_SEP];for(var u=0;u<n.length;u++){var f=n[u],d=0,l=0,c=0;o=void 0;for(var p=new E({comments:r,delimiter:f,newline:t,preview:10}).parse(e),g=0;g<p.data.length;g++)if(i&&y(p.data[g]))c++;else {var _=p.data[g].length;l+=_,void 0!==o?0<_&&(d+=Math.abs(_-o),o=_):o=_;}0<p.data.length&&(l/=p.data.length-c),(void 0===a||d<=a)&&(void 0===h||h<l)&&1.99<l&&(a=d,s=f,h=l);}return {successful:!!(m.delimiter=s),bestDelimiter:s}}(e,m.newline,m.skipEmptyLines,m.comments,m.delimitersToGuess);n.successful?m.delimiter=n.bestDelimiter:(h=!0,m.delimiter=b.DefaultDelimiter),c.meta.delimiter=m.delimiter;}var s=w(m);return m.preview&&m.header&&s.preview++,a=e,o=new E(s),c=o.parse(a,t,i),g(),d?{meta:{paused:!0}}:c||{meta:{paused:!1}}},this.paused=function(){return d},this.pause=function(){d=!0,o.abort(),a=M(m.chunk)?"":a.substring(o.getCharIndex());},this.resume=function(){t.streamer._halted?(d=!1,t.streamer.parseChunk(a,!0)):setTimeout(t.resume,3);},this.aborted=function(){return e},this.abort=function(){e=!0,o.abort(),c.meta.aborted=!0,M(m.complete)&&m.complete(c),a="";};}function j(e){return e.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}function E(e){var S,O=(e=e||{}).delimiter,x=e.newline,I=e.comments,T=e.step,D=e.preview,A=e.fastMode,L=S=void 0===e.quoteChar?'"':e.quoteChar;if(void 0!==e.escapeChar&&(L=e.escapeChar),("string"!=typeof O||-1<b.BAD_DELIMITERS.indexOf(O))&&(O=","),I===O)throw new Error("Comment character same as delimiter");!0===I?I="#":("string"!=typeof I||-1<b.BAD_DELIMITERS.indexOf(I))&&(I=!1),"\n"!==x&&"\r"!==x&&"\r\n"!==x&&(x="\n");var F=0,z=!1;this.parse=function(r,t,i){if("string"!=typeof r)throw new Error("Input must be a string");var n=r.length,e=O.length,s=x.length,a=I.length,o=M(T),h=[],u=[],f=[],d=F=0;if(!r)return C();if(A||!1!==A&&-1===r.indexOf(S)){for(var l=r.split(x),c=0;c<l.length;c++){if(f=l[c],F+=f.length,c!==l.length-1)F+=x.length;else if(i)return C();if(!I||f.substring(0,a)!==I){if(o){if(h=[],k(f.split(O)),R(),z)return C()}else k(f.split(O));if(D&&D<=c)return h=h.slice(0,D),C(!0)}}return C()}for(var p=r.indexOf(O,F),g=r.indexOf(x,F),_=new RegExp(j(L)+j(S),"g"),m=r.indexOf(S,F);;)if(r[F]!==S)if(I&&0===f.length&&r.substring(F,F+a)===I){if(-1===g)return C();F=g+s,g=r.indexOf(x,F),p=r.indexOf(O,F);}else if(-1!==p&&(p<g||-1===g))f.push(r.substring(F,p)),F=p+e,p=r.indexOf(O,F);else {if(-1===g)break;if(f.push(r.substring(F,g)),w(g+s),o&&(R(),z))return C();if(D&&h.length>=D)return C(!0)}else for(m=F,F++;;){if(-1===(m=r.indexOf(S,m+1)))return i||u.push({type:"Quotes",code:"MissingQuotes",message:"Quoted field unterminated",row:h.length,index:F}),E();if(m===n-1)return E(r.substring(F,m).replace(_,S));if(S!==L||r[m+1]!==L){if(S===L||0===m||r[m-1]!==L){-1!==p&&p<m+1&&(p=r.indexOf(O,m+1)),-1!==g&&g<m+1&&(g=r.indexOf(x,m+1));var y=b(-1===g?p:Math.min(p,g));if(r[m+1+y]===O){f.push(r.substring(F,m).replace(_,S)),r[F=m+1+y+e]!==S&&(m=r.indexOf(S,F)),p=r.indexOf(O,F),g=r.indexOf(x,F);break}var v=b(g);if(r.substring(m+1+v,m+1+v+s)===x){if(f.push(r.substring(F,m).replace(_,S)),w(m+1+v+s),p=r.indexOf(O,F),m=r.indexOf(S,F),o&&(R(),z))return C();if(D&&h.length>=D)return C(!0);break}u.push({type:"Quotes",code:"InvalidQuotes",message:"Trailing quote on quoted field is malformed",row:h.length,index:F}),m++;}}else m++;}return E();function k(e){h.push(e),d=F;}function b(e){var t=0;if(-1!==e){var i=r.substring(m+1,e);i&&""===i.trim()&&(t=i.length);}return t}function E(e){return i||(void 0===e&&(e=r.substring(F)),f.push(e),F=n,k(f),o&&R()),C()}function w(e){F=e,k(f),f=[],g=r.indexOf(x,F);}function C(e){return {data:h,errors:u,meta:{delimiter:O,linebreak:x,aborted:z,truncated:!!e,cursor:d+(t||0)}}}function R(){T(C()),h=[],u=[];}},this.abort=function(){z=!0;},this.getCharIndex=function(){return F};}function _(e){var t=e.data,i=a[t.workerId],r=!1;if(t.error)i.userError(t.error,t.file);else if(t.results&&t.results.data){var n={abort:function(){r=!0,m(t.workerId,{data:[],errors:[],meta:{aborted:!0}});},pause:y,resume:y};if(M(i.userStep)){for(var s=0;s<t.results.data.length&&(i.userStep({data:t.results.data[s],errors:t.results.errors,meta:t.results.meta},n),!r);s++);delete t.results;}else M(i.userChunk)&&(i.userChunk(t.results,n,t.file),delete t.results);}t.finished&&!r&&m(t.workerId,t.results);}function m(e,t){var i=a[e];M(i.userComplete)&&i.userComplete(t),i.terminate(),delete a[e];}function y(){throw new Error("Not implemented.")}function w(e){if("object"!=typeof e||null===e)return e;var t=Array.isArray(e)?[]:{};for(var i in e)t[i]=w(e[i]);return t}function v(e,t){return function(){e.apply(t,arguments);}}function M(e){return "function"==typeof e}return o&&(f.onmessage=function(e){var t=e.data;void 0===b.WORKER_ID&&t&&(b.WORKER_ID=t.workerId);if("string"==typeof t.input)f.postMessage({workerId:b.WORKER_ID,results:b.parse(t.input,t.config),finished:!0});else if(f.File&&t.input instanceof File||t.input instanceof Object){var i=b.parse(t.input,t.config);i&&f.postMessage({workerId:b.WORKER_ID,results:i,finished:!0});}}),(l.prototype=Object.create(u.prototype)).constructor=l,(c.prototype=Object.create(u.prototype)).constructor=c,(p.prototype=Object.create(p.prototype)).constructor=p,(g.prototype=Object.create(u.prototype)).constructor=g,b});
+    });
+
+    /* src/CSVDownloader.svelte generated by Svelte v3.44.2 */
+    const file$2 = "src/CSVDownloader.svelte";
+
+    function create_fragment$2(ctx) {
+    	let button;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	const default_slot_template = /*#slots*/ ctx[6].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			if (default_slot) default_slot.c();
+    			attr_dev(button, "class", "btn btn-outline-primary");
+    			add_location(button, file$2, 37, 0, 996);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (default_slot) {
+    				default_slot.m(button, null);
+    			}
+
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(
+    					button,
+    					"click",
+    					function () {
+    						if (is_function(/*download*/ ctx[3](/*data*/ ctx[0], /*filename*/ ctx[1], /*bom*/ ctx[2]))) /*download*/ ctx[3](/*data*/ ctx[0], /*filename*/ ctx[1], /*bom*/ ctx[2]).apply(this, arguments);
+    					},
+    					false,
+    					false,
+    					false
+    				);
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, [dirty]) {
+    			ctx = new_ctx;
+
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 32)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[5],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[5])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[5], dirty, null),
+    						null
+    					);
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			if (default_slot) default_slot.d(detaching);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('CSVDownloader', slots, ['default']);
+    	let { data } = $$props;
+    	let { filename = 'filename' } = $$props;
+    	let { type = 'link' } = $$props;
+    	let { bom = 2 } = $$props;
+
+    	function download(data, filename, bom) {
+    		const bomCode = bom ? '\ufeff' : '';
+    		let csvContent = null;
+
+    		if (typeof data === 'object') {
+    			csvContent = papaparse_min.unparse(data);
+    		} else {
+    			csvContent = data;
+    		}
+
+    		const csvData = new Blob([`${bomCode}${csvContent}`], { type: 'text/csv;charset=utf-8;' });
+    		let csvURL = null;
+
+    		if (navigator.msSaveBlob) {
+    			csvURL = navigator.msSaveBlob(csvData, `${filename}.csv`);
+    		} else {
+    			csvURL = window.URL.createObjectURL(csvData);
+    		}
+
+    		const link = document.createElement('a');
+    		link.href = csvURL;
+    		link.setAttribute('download', `${filename}.csv`);
+    		link.click();
+    		link.remove();
+    	}
+
+    	const writable_props = ['data', 'filename', 'type', 'bom'];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<CSVDownloader> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ('data' in $$props) $$invalidate(0, data = $$props.data);
+    		if ('filename' in $$props) $$invalidate(1, filename = $$props.filename);
+    		if ('type' in $$props) $$invalidate(4, type = $$props.type);
+    		if ('bom' in $$props) $$invalidate(2, bom = $$props.bom);
+    		if ('$$scope' in $$props) $$invalidate(5, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		PapaParse: papaparse_min,
+    		data,
+    		filename,
+    		type,
+    		bom,
+    		download
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('data' in $$props) $$invalidate(0, data = $$props.data);
+    		if ('filename' in $$props) $$invalidate(1, filename = $$props.filename);
+    		if ('type' in $$props) $$invalidate(4, type = $$props.type);
+    		if ('bom' in $$props) $$invalidate(2, bom = $$props.bom);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [data, filename, bom, download, type, $$scope, slots];
+    }
+
+    class CSVDownloader extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, { data: 0, filename: 1, type: 4, bom: 2 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "CSVDownloader",
+    			options,
+    			id: create_fragment$2.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*data*/ ctx[0] === undefined && !('data' in props)) {
+    			console.warn("<CSVDownloader> was created without expected prop 'data'");
+    		}
+    	}
+
+    	get data() {
+    		throw new Error("<CSVDownloader>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set data(value) {
+    		throw new Error("<CSVDownloader>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get filename() {
+    		throw new Error("<CSVDownloader>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set filename(value) {
+    		throw new Error("<CSVDownloader>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get type() {
+    		throw new Error("<CSVDownloader>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set type(value) {
+    		throw new Error("<CSVDownloader>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get bom() {
+    		throw new Error("<CSVDownloader>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set bom(value) {
+    		throw new Error("<CSVDownloader>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    const GAME_OVER_SECTOR = "je crois profondément que pour bien travailler il faut croire en ce que l'on fait.\nMalheureusement, ce secteur d'activités ne correspond pas à mes valeurs.";
+    const GAME_OVER_LOCATION = "je ne souhaite pas déménager aujourd'hui.";
+    const GAME_OVER_LOCATION_REMOTE = GAME_OVER_LOCATION + "\nle nombre de journées que vous proposez en télétravail m'obligerai à passer beaucoup de temps dans les tra,sports.";
+    const GAME_OVER_HL = "je tiens à poursuivre mon engagement dans le milieu associatif ce qui fait que je ne peux accepter un contrat de travail à temps plein.";
+
+    /* src/About.svelte generated by Svelte v3.44.2 */
+
+    const file$1 = "src/About.svelte";
+
+    function create_fragment$1(ctx) {
+    	let div;
+    	let h3;
+    	let t1;
+    	let p0;
+    	let t3;
+    	let p1;
+    	let t4;
+    	let a0;
+    	let t6;
+    	let t7;
+    	let p2;
+    	let t8;
+    	let a1;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			h3 = element("h3");
+    			h3.textContent = "A propos";
+    			t1 = space();
+    			p0 = element("p");
+    			p0.textContent = "Aucune données n'a été récoltés sur vos choix de réponses. Il y a juste un Google Analytics qui me permet d'avoir des data sur le taux de transformation de ce questionnaire";
+    			t3 = space();
+    			p1 = element("p");
+    			t4 = text("Ce questionnaire a été programmé grace à ");
+    			a0 = element("a");
+    			a0.textContent = "Svelte";
+    			t6 = text(".");
+    			t7 = space();
+    			p2 = element("p");
+    			t8 = text("Vous pouvez retrouver le code source sur ");
+    			a1 = element("a");
+    			a1.textContent = "Github";
+    			attr_dev(h3, "class", "pb-3 border-bottom border-primary");
+    			add_location(h3, file$1, 1, 4, 27);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file$1, 2, 4, 91);
+    			attr_dev(a0, "target", "_blank");
+    			attr_dev(a0, "href", "https://svelte.dev/");
+    			add_location(a0, file$1, 3, 61, 345);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file$1, 3, 4, 288);
+    			attr_dev(a1, "target", "_blank");
+    			attr_dev(a1, "href", "https://github.com/giraud-d/job");
+    			add_location(a1, file$1, 4, 61, 468);
+    			attr_dev(p2, "class", "lead");
+    			add_location(p2, file$1, 4, 4, 411);
+    			attr_dev(div, "class", "row mt-5");
+    			add_location(div, file$1, 0, 0, 0);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, h3);
+    			append_dev(div, t1);
+    			append_dev(div, p0);
+    			append_dev(div, t3);
+    			append_dev(div, p1);
+    			append_dev(p1, t4);
+    			append_dev(p1, a0);
+    			append_dev(p1, t6);
+    			append_dev(div, t7);
+    			append_dev(div, p2);
+    			append_dev(p2, t8);
+    			append_dev(p2, a1);
+    		},
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$1($$self, $$props) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('About', slots, []);
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<About> was created with unknown prop '${key}'`);
+    	});
+
+    	return [];
+    }
+
+    class About extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "About",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+    }
+
+    /* src/App.svelte generated by Svelte v3.44.2 */
+    const file = "src/App.svelte";
+
+    // (138:8) {#if p1Name}
+    function create_if_block_11(ctx) {
+    	let div1;
+    	let h1;
+    	let t1;
+    	let div0;
+    	let p;
+    	let t3;
+    	let input;
+    	let t4;
+    	let button;
+    	let t6;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let if_block = /*p1InvalidName*/ ctx[1] && create_if_block_12(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Bonjour";
+    			t1 = space();
+    			div0 = element("div");
+    			p = element("p");
+    			p.textContent = "Merci de renseigner votre nom ou celui de votre entreprise";
+    			t3 = space();
+    			input = element("input");
+    			t4 = space();
+    			button = element("button");
+    			button.textContent = "Valider";
+    			t6 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 139, 16, 3592);
+    			attr_dev(p, "class", "lead");
+    			add_location(p, file, 141, 20, 3710);
+    			attr_dev(input, "type", "text");
+    			attr_dev(input, "class", "form-control");
+    			attr_dev(input, "placeholder", "Nom");
+    			add_location(input, file, 142, 20, 3809);
+    			attr_dev(button, "class", "mt-3 btn btn-outline-primary");
+    			attr_dev(button, "type", "button");
+    			add_location(button, file, 145, 20, 3968);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 140, 16, 3672);
+    			add_location(div1, file, 138, 12, 3531);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(div1, t1);
+    			append_dev(div1, div0);
+    			append_dev(div0, p);
+    			append_dev(div0, t3);
+    			append_dev(div0, input);
+    			set_input_value(input, /*employerName*/ ctx[15]);
+    			append_dev(div0, t4);
+    			append_dev(div0, button);
+    			append_dev(div0, t6);
+    			if (if_block) if_block.m(div0, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[29]),
+    					listen_dev(button, "click", /*handleP1Name*/ ctx[21], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*employerName*/ 32768 && input.value !== /*employerName*/ ctx[15]) {
+    				set_input_value(input, /*employerName*/ ctx[15]);
+    			}
+
+    			if (/*p1InvalidName*/ ctx[1]) {
+    				if (if_block) ; else {
+    					if_block = create_if_block_12(ctx);
+    					if_block.c();
+    					if_block.m(div0, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			if (div1_outro) div1_outro.end(1);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (if_block) if_block.d();
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_11.name,
+    		type: "if",
+    		source: "(138:8) {#if p1Name}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (148:20) {#if p1InvalidName}
+    function create_if_block_12(ctx) {
+    	let div;
+    	let t0;
+    	let br;
+    	let t1;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t0 = text("Merci de remplir votre nom");
+    			br = element("br");
+    			t1 = text("\n                            Aucune donnée n'est conservée sur ce site");
+    			add_location(br, file, 149, 54, 4258);
+    			attr_dev(div, "class", "mt-3 alert alert-danger");
+    			attr_dev(div, "role", "alert");
+    			add_location(div, file, 148, 24, 4153);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t0);
+    			append_dev(div, br);
+    			append_dev(div, t1);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_12.name,
+    		type: "if",
+    		source: "(148:20) {#if p1InvalidName}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (158:8) {#if p1Explication}
+    function create_if_block_10(ctx) {
+    	let div1;
+    	let h1;
+    	let t0;
+    	let t1;
+    	let t2;
+    	let t3;
+    	let div0;
+    	let p0;
+    	let t5;
+    	let p1;
+    	let t7;
+    	let button;
+    	let div1_intro;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			t0 = text("Bienvenue ");
+    			t1 = text(/*employerName*/ ctx[15]);
+    			t2 = text(" !");
+    			t3 = space();
+    			div0 = element("div");
+    			p0 = element("p");
+    			p0.textContent = "Avant de vous parler un peu plus de moi, je souhaiterais savoir un peu plus ce que\n                        vous me proposez.";
+    			t5 = space();
+    			p1 = element("p");
+    			p1.textContent = "Cela vous fera gagner du temps, car si le type d'emploi que vous me proposez ne me\n                        convient pas nous le saurons très rapidement.";
+    			t7 = space();
+    			button = element("button");
+    			button.textContent = "Commencer (2~5 min)";
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 159, 16, 4592);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file, 161, 20, 4729);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file, 163, 20, 4894);
+    			attr_dev(button, "type", "button");
+    			attr_dev(button, "class", "mt-3 btn btn-outline-primary");
+    			add_location(button, file, 165, 20, 5087);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 160, 16, 4691);
+    			add_location(div1, file, 158, 12, 4487);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(h1, t0);
+    			append_dev(h1, t1);
+    			append_dev(h1, t2);
+    			append_dev(div1, t3);
+    			append_dev(div1, div0);
+    			append_dev(div0, p0);
+    			append_dev(div0, t5);
+    			append_dev(div0, p1);
+    			append_dev(div0, t7);
+    			append_dev(div0, button);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*handleP1Explication*/ ctx[22], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty[0] & /*employerName*/ 32768) set_data_dev(t1, /*employerName*/ ctx[15]);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div1_outro) div1_outro.end(1);
+    				div1_intro = create_in_transition(div1, fade, { delay: 500, duration: 1000 });
+    				div1_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div1_intro) div1_intro.invalidate();
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_10.name,
+    		type: "if",
+    		source: "(158:8) {#if p1Explication}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (173:8) {#if p2Sector}
+    function create_if_block_9(ctx) {
+    	let div1;
+    	let h1;
+    	let t1;
+    	let p;
+    	let i;
+    	let t3;
+    	let div0;
+    	let button0;
+    	let t5;
+    	let button1;
+    	let t7;
+    	let button2;
+    	let div1_intro;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Quel est votre secteur d'activité ?";
+    			t1 = space();
+    			p = element("p");
+    			i = element("i");
+    			i.textContent = "La matrice utilisée ici, pour classer les secteurs d'activités, est totalement\n                    subjective et n'a pas vocation à stigmatiser qui que ce soit.";
+    			t3 = space();
+    			div0 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "Economie\n                        Sociale & Solidaire, Transition Ecologique, Social, Service Publique, ...";
+    			t5 = space();
+    			button1 = element("button");
+    			button1.textContent = "Banque, Finance,\n                        Energie Fossile, Armement, Tourisme de masse, ...";
+    			t7 = space();
+    			button2 = element("button");
+    			button2.textContent = "Autre";
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 174, 16, 5449);
+    			add_location(i, file, 175, 32, 5573);
+    			attr_dev(p, "class", "lead");
+    			add_location(p, file, 175, 16, 5557);
+    			attr_dev(button0, "class", "btn btn-outline-primary");
+    			add_location(button0, file, 179, 20, 5843);
+    			attr_dev(button1, "class", "btn btn-outline-primary");
+    			add_location(button1, file, 182, 20, 6085);
+    			attr_dev(button2, "class", "btn btn-outline-primary");
+    			add_location(button2, file, 185, 20, 6310);
+    			attr_dev(div0, "class", "d-grid gap-lg-4 col-12 mx-auto");
+    			add_location(div0, file, 178, 16, 5778);
+    			add_location(div1, file, 173, 12, 5344);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(div1, t1);
+    			append_dev(div1, p);
+    			append_dev(p, i);
+    			append_dev(div1, t3);
+    			append_dev(div1, div0);
+    			append_dev(div0, button0);
+    			append_dev(div0, t5);
+    			append_dev(div0, button1);
+    			append_dev(div0, t7);
+    			append_dev(div0, button2);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler*/ ctx[30], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_1*/ ctx[31], false, false, false),
+    					listen_dev(button2, "click", /*click_handler_2*/ ctx[32], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div1_outro) div1_outro.end(1);
+    				div1_intro = create_in_transition(div1, fade, { delay: 500, duration: 1000 });
+    				div1_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div1_intro) div1_intro.invalidate();
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_9.name,
+    		type: "if",
+    		source: "(173:8) {#if p2Sector}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (193:8) {#if p2Contract}
+    function create_if_block_8(ctx) {
+    	let div1;
+    	let h1;
+    	let t1;
+    	let div0;
+    	let button0;
+    	let t3;
+    	let button1;
+    	let t5;
+    	let button2;
+    	let div1_intro;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Quel type de contrat ?";
+    			t1 = space();
+    			div0 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "Temps plein";
+    			t3 = space();
+    			button1 = element("button");
+    			button1.textContent = "Temps partiel";
+    			t5 = space();
+    			button2 = element("button");
+    			button2.textContent = "Freelance";
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 194, 16, 6634);
+    			attr_dev(button0, "class", "btn btn-outline-primary");
+    			add_location(button0, file, 196, 20, 6794);
+    			attr_dev(button1, "class", "btn btn-outline-primary");
+    			add_location(button1, file, 199, 20, 6975);
+    			attr_dev(button2, "class", "btn btn-outline-primary");
+    			add_location(button2, file, 202, 20, 7158);
+    			attr_dev(div0, "class", "d-grid gap-sm-4 col-12 mx-auto");
+    			add_location(div0, file, 195, 16, 6729);
+    			add_location(div1, file, 193, 12, 6529);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(div1, t1);
+    			append_dev(div1, div0);
+    			append_dev(div0, button0);
+    			append_dev(div0, t3);
+    			append_dev(div0, button1);
+    			append_dev(div0, t5);
+    			append_dev(div0, button2);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler_3*/ ctx[33], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_4*/ ctx[34], false, false, false),
+    					listen_dev(button2, "click", /*click_handler_5*/ ctx[35], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div1_outro) div1_outro.end(1);
+    				div1_intro = create_in_transition(div1, fade, { delay: 500, duration: 1000 });
+    				div1_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div1_intro) div1_intro.invalidate();
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_8.name,
+    		type: "if",
+    		source: "(193:8) {#if p2Contract}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (210:8) {#if p2Remote}
+    function create_if_block_6(ctx) {
+    	let div1;
+    	let h1;
+    	let t1;
+    	let div0;
+    	let p0;
+    	let t2;
+    	let b0;
+    	let t4;
+    	let b1;
+    	let t6;
+    	let p1;
+    	let i;
+    	let t8;
+    	let t9;
+    	let input;
+    	let t10;
+    	let p2;
+    	let b2;
+    	let t11;
+    	let t12;
+    	let t13;
+    	let button;
+    	let div1_intro;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let if_block = /*contract*/ ctx[17] === CONTRACT.PART_TIME && create_if_block_7(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Quelle est votre politique de télétravail ?";
+    			t1 = space();
+    			div0 = element("div");
+    			p0 = element("p");
+    			t2 = text("Il s'agit d'une ");
+    			b0 = element("b");
+    			b0.textContent = "moyenne hebdomadaire";
+    			t4 = text(" du nombre de ");
+    			b1 = element("b");
+    			b1.textContent = "journées\n                        télétravaillées.";
+    			t6 = space();
+    			p1 = element("p");
+    			i = element("i");
+    			i.textContent = "Si par exemple vous travaillez avec des sprints de trois semaines et que vous\n                        souhaitez que l'équipe se réunisse deux jours consécutifs pour des cérémonies vous pouvez\n                        sélectionner 4j/5.";
+    			t8 = space();
+    			if (if_block) if_block.c();
+    			t9 = space();
+    			input = element("input");
+    			t10 = space();
+    			p2 = element("p");
+    			b2 = element("b");
+    			t11 = text(/*p2RemoteVal*/ ctx[6]);
+    			t12 = text(" jours de télétravail");
+    			t13 = space();
+    			button = element("button");
+    			button.textContent = "Valider";
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 211, 16, 7514);
+    			add_location(b0, file, 213, 52, 7700);
+    			add_location(b1, file, 213, 93, 7741);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file, 213, 20, 7668);
+    			add_location(i, file, 215, 36, 7838);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file, 215, 20, 7822);
+    			attr_dev(input, "type", "range");
+    			attr_dev(input, "min", "0");
+    			attr_dev(input, "max", "5");
+    			add_location(input, file, 224, 20, 8495);
+    			add_location(b2, file, 225, 36, 8587);
+    			attr_dev(p2, "class", "lead");
+    			add_location(p2, file, 225, 20, 8571);
+    			attr_dev(button, "class", "btn btn-outline-primary");
+    			add_location(button, file, 226, 20, 8653);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 212, 16, 7630);
+    			add_location(div1, file, 210, 12, 7409);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(div1, t1);
+    			append_dev(div1, div0);
+    			append_dev(div0, p0);
+    			append_dev(p0, t2);
+    			append_dev(p0, b0);
+    			append_dev(p0, t4);
+    			append_dev(p0, b1);
+    			append_dev(div0, t6);
+    			append_dev(div0, p1);
+    			append_dev(p1, i);
+    			append_dev(div0, t8);
+    			if (if_block) if_block.m(div0, null);
+    			append_dev(div0, t9);
+    			append_dev(div0, input);
+    			set_input_value(input, /*p2RemoteVal*/ ctx[6]);
+    			append_dev(div0, t10);
+    			append_dev(div0, p2);
+    			append_dev(p2, b2);
+    			append_dev(b2, t11);
+    			append_dev(b2, t12);
+    			append_dev(div0, t13);
+    			append_dev(div0, button);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input, "change", /*input_change_input_handler*/ ctx[36]),
+    					listen_dev(input, "input", /*input_change_input_handler*/ ctx[36]),
+    					listen_dev(button, "click", /*click_handler_6*/ ctx[37], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*contract*/ ctx[17] === CONTRACT.PART_TIME) {
+    				if (if_block) ; else {
+    					if_block = create_if_block_7(ctx);
+    					if_block.c();
+    					if_block.m(div0, t9);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (dirty[0] & /*p2RemoteVal*/ 64) {
+    				set_input_value(input, /*p2RemoteVal*/ ctx[6]);
+    			}
+
+    			if (!current || dirty[0] & /*p2RemoteVal*/ 64) set_data_dev(t11, /*p2RemoteVal*/ ctx[6]);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div1_outro) div1_outro.end(1);
+    				div1_intro = create_in_transition(div1, fade, { delay: 500, duration: 1000 });
+    				div1_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div1_intro) div1_intro.invalidate();
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (if_block) if_block.d();
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_6.name,
+    		type: "if",
+    		source: "(210:8) {#if p2Remote}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (219:20) {#if contract === CONTRACT.PART_TIME}
+    function create_if_block_7(ctx) {
+    	let div;
+    	let t0;
+    	let i;
+    	let t2;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			t0 = text("Cas particulier du temps partiel : Merci de faire au prorata sur une semaine de 5j\n                            ");
+    			i = element("i");
+    			i.textContent = "(désolé je n'ai pas codé ce cas particulier #80/20)";
+    			t2 = text(".");
+    			add_location(i, file, 221, 28, 8357);
+    			attr_dev(div, "class", "mt-3 alert alert-warning");
+    			attr_dev(div, "role", "alert");
+    			add_location(div, file, 219, 24, 8166);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, t0);
+    			append_dev(div, i);
+    			append_dev(div, t2);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_7.name,
+    		type: "if",
+    		source: "(219:20) {#if contract === CONTRACT.PART_TIME}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (233:8) {#if p2Location}
+    function create_if_block_4(ctx) {
+    	let div5;
+    	let h1;
+    	let t1;
+    	let div4;
+    	let div1;
+    	let div0;
+    	let button0;
+    	let t3;
+    	let div3;
+    	let div2;
+    	let p;
+    	let t5;
+    	let input;
+    	let t6;
+    	let button1;
+    	let t8;
+    	let div5_intro;
+    	let div5_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let if_block = /*p2InvalidLocation*/ ctx[8] && create_if_block_5(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div5 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Localisation";
+    			t1 = space();
+    			div4 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "Département de Loire-Atlantique";
+    			t3 = space();
+    			div3 = element("div");
+    			div2 = element("div");
+    			p = element("p");
+    			p.textContent = "Si vous n'êtes pas dans le département de Loire-Atlantique merci de préciser\n                                l'emplacement des bureaux";
+    			t5 = space();
+    			input = element("input");
+    			t6 = space();
+    			button1 = element("button");
+    			button1.textContent = "Valider";
+    			t8 = space();
+    			if (if_block) if_block.c();
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 234, 16, 8975);
+    			attr_dev(button0, "class", "btn btn-outline-primary");
+    			add_location(button0, file, 238, 28, 9188);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 237, 24, 9142);
+    			attr_dev(div1, "class", "col-6");
+    			add_location(div1, file, 236, 20, 9098);
+    			attr_dev(p, "class", "lead");
+    			add_location(p, file, 245, 28, 9539);
+    			attr_dev(input, "class", "form-control mt-4");
+    			attr_dev(input, "placeholder", "Ville, Pays");
+    			attr_dev(input, "type", "text");
+    			add_location(input, file, 247, 28, 9722);
+    			attr_dev(button1, "class", "mt-3 btn btn-outline-primary");
+    			attr_dev(button1, "type", "button");
+    			add_location(button1, file, 249, 28, 9879);
+    			attr_dev(div2, "class", "row");
+    			add_location(div2, file, 244, 24, 9493);
+    			attr_dev(div3, "class", "col-6");
+    			add_location(div3, file, 243, 20, 9449);
+    			attr_dev(div4, "class", "row");
+    			add_location(div4, file, 235, 16, 9060);
+    			add_location(div5, file, 233, 12, 8870);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, h1);
+    			append_dev(div5, t1);
+    			append_dev(div5, div4);
+    			append_dev(div4, div1);
+    			append_dev(div1, div0);
+    			append_dev(div0, button0);
+    			append_dev(div4, t3);
+    			append_dev(div4, div3);
+    			append_dev(div3, div2);
+    			append_dev(div2, p);
+    			append_dev(div2, t5);
+    			append_dev(div2, input);
+    			set_input_value(input, /*location*/ ctx[19]);
+    			append_dev(div2, t6);
+    			append_dev(div2, button1);
+    			append_dev(div2, t8);
+    			if (if_block) if_block.m(div2, null);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler_7*/ ctx[38], false, false, false),
+    					listen_dev(input, "input", /*input_input_handler_1*/ ctx[39]),
+    					listen_dev(button1, "click", /*click_handler_8*/ ctx[40], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*location*/ 524288 && input.value !== /*location*/ ctx[19]) {
+    				set_input_value(input, /*location*/ ctx[19]);
+    			}
+
+    			if (/*p2InvalidLocation*/ ctx[8]) {
+    				if (if_block) ; else {
+    					if_block = create_if_block_5(ctx);
+    					if_block.c();
+    					if_block.m(div2, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div5_outro) div5_outro.end(1);
+    				div5_intro = create_in_transition(div5, fade, { delay: 500, duration: 1000 });
+    				div5_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div5_intro) div5_intro.invalidate();
+    			div5_outro = create_out_transition(div5, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div5);
+    			if (if_block) if_block.d();
+    			if (detaching && div5_outro) div5_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_4.name,
+    		type: "if",
+    		source: "(233:8) {#if p2Location}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (254:28) {#if p2InvalidLocation}
+    function create_if_block_5(ctx) {
+    	let div;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			div.textContent = "Merci de renseigner un lieu";
+    			attr_dev(div, "class", "mt-3 alert alert-danger");
+    			attr_dev(div, "role", "alert");
+    			add_location(div, file, 254, 32, 10181);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5.name,
+    		type: "if",
+    		source: "(254:28) {#if p2InvalidLocation}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (265:8) {#if p2LocationRemoteDilemma}
+    function create_if_block_3(ctx) {
+    	let div1;
+    	let h1;
+    	let t1;
+    	let div0;
+    	let p0;
+    	let t2;
+    	let t3;
+    	let t4;
+    	let t5;
+    	let p1;
+    	let t7;
+    	let p2;
+    	let t9;
+    	let button0;
+    	let t11;
+    	let button1;
+    	let div1_intro;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Tension : Localisation/Télétravail";
+    			t1 = space();
+    			div0 = element("div");
+    			p0 = element("p");
+    			t2 = text("Votre bureau est en dehors de mon département et vous me proposer en\n                        moyenne ");
+    			t3 = text(/*remote*/ ctx[18]);
+    			t4 = text(" jours de télétravail par semaines.");
+    			t5 = space();
+    			p1 = element("p");
+    			p1.textContent = "Je ne souhaite pas déménager, ni passer beaucoup de temps dans les transports.";
+    			t7 = space();
+    			p2 = element("p");
+    			p2.textContent = "Consentez-vous à passer en moyenne quatre jours de télétravail par semaine ?";
+    			t9 = space();
+    			button0 = element("button");
+    			button0.textContent = "Oui";
+    			t11 = space();
+    			button1 = element("button");
+    			button1.textContent = "Non";
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 266, 16, 10639);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file, 268, 20, 10807);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file, 270, 20, 10992);
+    			attr_dev(p2, "class", "lead");
+    			add_location(p2, file, 271, 20, 11111);
+    			attr_dev(button0, "class", "col-4 m-3 btn btn-outline-primary");
+    			add_location(button0, file, 272, 20, 11228);
+    			attr_dev(button1, "class", "col-4 m-3 btn btn-outline-primary");
+    			add_location(button1, file, 276, 20, 11438);
+    			attr_dev(div0, "class", "row justify-content-center");
+    			add_location(div0, file, 267, 16, 10746);
+    			add_location(div1, file, 265, 12, 10534);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(div1, t1);
+    			append_dev(div1, div0);
+    			append_dev(div0, p0);
+    			append_dev(p0, t2);
+    			append_dev(p0, t3);
+    			append_dev(p0, t4);
+    			append_dev(div0, t5);
+    			append_dev(div0, p1);
+    			append_dev(div0, t7);
+    			append_dev(div0, p2);
+    			append_dev(div0, t9);
+    			append_dev(div0, button0);
+    			append_dev(div0, t11);
+    			append_dev(div0, button1);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler_9*/ ctx[41], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_10*/ ctx[42], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty[0] & /*remote*/ 262144) set_data_dev(t3, /*remote*/ ctx[18]);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div1_outro) div1_outro.end(1);
+    				div1_intro = create_in_transition(div1, fade, { delay: 500, duration: 1000 });
+    				div1_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div1_intro) div1_intro.invalidate();
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_3.name,
+    		type: "if",
+    		source: "(265:8) {#if p2LocationRemoteDilemma}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (285:8) {#if p3HL}
+    function create_if_block_2(ctx) {
+    	let div1;
+    	let h1;
+    	let t1;
+    	let div0;
+    	let p0;
+    	let t3;
+    	let p1;
+    	let t5;
+    	let p2;
+    	let t7;
+    	let button0;
+    	let t9;
+    	let button1;
+    	let div1_intro;
+    	let div1_outro;
+    	let current;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Temps partiel";
+    			t1 = space();
+    			div0 = element("div");
+    			p0 = element("p");
+    			p0.textContent = "Je suis bénévole dans l'association Hameaux Légers avec un engagement d'un jour par\n                        semaine.";
+    			t3 = space();
+    			p1 = element("p");
+    			p1.textContent = "Afin de pouvoir continuer mon engagement dans cette association j'ai besoin d'avoir\n                        un contrat maximum de quatre jours par semaines.";
+    			t5 = space();
+    			p2 = element("p");
+    			p2.textContent = "Est ce que cela est compatible avec votre offre d'emploi ?";
+    			t7 = space();
+    			button0 = element("button");
+    			button0.textContent = "Oui";
+    			t9 = space();
+    			button1 = element("button");
+    			button1.textContent = "Non";
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 286, 16, 11822);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file, 288, 20, 11946);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file, 290, 20, 12103);
+    			attr_dev(p2, "class", "lead");
+    			add_location(p2, file, 292, 20, 12300);
+    			attr_dev(button0, "class", "col-4 m-3 btn btn-outline-primary");
+    			add_location(button0, file, 293, 20, 12399);
+    			attr_dev(button1, "class", "col-4 m-3 btn btn-outline-primary");
+    			add_location(button1, file, 297, 20, 12590);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 287, 16, 11908);
+    			add_location(div1, file, 285, 12, 11717);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, h1);
+    			append_dev(div1, t1);
+    			append_dev(div1, div0);
+    			append_dev(div0, p0);
+    			append_dev(div0, t3);
+    			append_dev(div0, p1);
+    			append_dev(div0, t5);
+    			append_dev(div0, p2);
+    			append_dev(div0, t7);
+    			append_dev(div0, button0);
+    			append_dev(div0, t9);
+    			append_dev(div0, button1);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*click_handler_11*/ ctx[43], false, false, false),
+    					listen_dev(button1, "click", /*click_handler_12*/ ctx[44], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+
+    			add_render_callback(() => {
+    				if (div1_outro) div1_outro.end(1);
+    				div1_intro = create_in_transition(div1, fade, { delay: 500, duration: 1000 });
+    				div1_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			if (div1_intro) div1_intro.invalidate();
+    			div1_outro = create_out_transition(div1, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			if (detaching && div1_outro) div1_outro.end();
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(285:8) {#if p3HL}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (306:8) {#if p9Result}
+    function create_if_block_1(ctx) {
+    	let div5;
+    	let h1;
+    	let t0;
+    	let t1;
+    	let t2;
+    	let div4;
+    	let p0;
+    	let t4;
+    	let csvdownloader;
+    	let t5;
+    	let div3;
+    	let p1;
+    	let t7;
+    	let p2;
+    	let t9;
+    	let div1;
+    	let h60;
+    	let t11;
+    	let div0;
+    	let a;
+    	let t13;
+    	let p3;
+    	let kbd0;
+    	let t15;
+    	let div2;
+    	let h61;
+    	let t17;
+    	let p4;
+    	let kbd1;
+    	let t19;
+    	let kbd2;
+    	let t21;
+    	let t22;
+    	let p5;
+    	let t23;
+    	let kbd3;
+    	let t25;
+    	let del;
+    	let t27;
+    	let div5_intro;
+    	let div5_outro;
+    	let current;
+
+    	csvdownloader = new CSVDownloader({
+    			props: {
+    				data: [
+    					{
+    						"employerName": /*employerName*/ ctx[15],
+    						"sector": /*sector*/ ctx[16],
+    						"contract": /*contract*/ ctx[17],
+    						"remote": /*remote*/ ctx[18],
+    						"loaction": /*location*/ ctx[19],
+    						"locationRemoteDilemma": /*locationRemoteDilemma*/ ctx[20]
+    					}
+    				],
+    				type: 'button',
+    				filename: 'filename',
+    				bom: true,
+    				$$slots: { default: [create_default_slot] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			div5 = element("div");
+    			h1 = element("h1");
+    			t0 = text("Merci ");
+    			t1 = text(/*employerName*/ ctx[15]);
+    			t2 = space();
+    			div4 = element("div");
+    			p0 = element("p");
+    			p0.textContent = "Le questionnaire se clot ici. Pour me contacter merci de télécharger le fichier CSV\n                        ci dessous";
+    			t4 = space();
+    			create_component(csvdownloader.$$.fragment);
+    			t5 = space();
+    			div3 = element("div");
+    			p1 = element("p");
+    			p1.textContent = "J'auto construit en ce moment ma maison la fin de chantier est prévu pour cet\n                            été. Je serai disponible à partir de septembre (sauf mission à temps partielles et\n                            freelance)";
+    			t7 = space();
+    			p2 = element("p");
+    			p2.textContent = "Pour prendre contact merci de m'envoyer un courriel à :";
+    			t9 = space();
+    			div1 = element("div");
+    			h60 = element("h6");
+    			h60.textContent = "Méthode Semi-Auto";
+    			t11 = space();
+    			div0 = element("div");
+    			a = element("a");
+    			a.textContent = "Lien mailto";
+    			t13 = space();
+    			p3 = element("p");
+    			kbd0 = element("kbd");
+    			kbd0.textContent = "avec le fichier .csv en pièce jointe";
+    			t15 = space();
+    			div2 = element("div");
+    			h61 = element("h6");
+    			h61.textContent = "Méthode Manuelle";
+    			t17 = space();
+    			p4 = element("p");
+    			kbd1 = element("kbd");
+    			kbd1.textContent = "damien@giraudet.me";
+    			t19 = text(" avec comme préfixe à votre objet\n                                ");
+    			kbd2 = element("kbd");
+    			kbd2.textContent = "[job-success-v1.1]";
+    			t21 = text(".");
+    			t22 = space();
+    			p5 = element("p");
+    			t23 = text("C'est important de bien mettre ce préfixe à votre objet et\n                                ");
+    			kbd3 = element("kbd");
+    			kbd3.textContent = "avec le fichier .csv en pièce jointe";
+    			t25 = text(" sinon\n                                ");
+    			del = element("del");
+    			del.textContent = "je";
+    			t27 = text("\n                                mon automatisation ne traitera pas le courriel.");
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 307, 16, 12959);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file, 309, 20, 13090);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file, 326, 24, 13939);
+    			attr_dev(p2, "class", "lead");
+    			add_location(p2, file, 329, 24, 14211);
+    			attr_dev(h60, "class", "pb-2 my-3 border-bottom border-primary");
+    			add_location(h60, file, 331, 28, 14359);
+    			attr_dev(a, "class", "btn btn-outline-primary");
+    			attr_dev(a, "href", "mailto:damien@giraudet.me?subject=[job-success-v1.1]");
+    			add_location(a, file, 333, 32, 14511);
+    			add_location(kbd0, file, 335, 62, 14719);
+    			attr_dev(p3, "class", "text-sm-start mt-3");
+    			add_location(p3, file, 335, 32, 14689);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 332, 28, 14461);
+    			attr_dev(div1, "class", "col-5");
+    			add_location(div1, file, 330, 24, 14311);
+    			attr_dev(h61, "class", "pb-2 my-3 border-bottom border-primary");
+    			add_location(h61, file, 339, 28, 14909);
+    			add_location(kbd1, file, 340, 52, 15034);
+    			add_location(kbd2, file, 341, 32, 15129);
+    			attr_dev(p4, "class", "text-justify");
+    			add_location(p4, file, 340, 28, 15010);
+    			add_location(kbd3, file, 343, 32, 15308);
+    			add_location(del, file, 344, 32, 15394);
+    			attr_dev(p5, "class", "text-justify");
+    			add_location(p5, file, 342, 28, 15192);
+    			attr_dev(div2, "class", "col-7");
+    			add_location(div2, file, 338, 24, 14861);
+    			attr_dev(div3, "class", "row mt-5");
+    			add_location(div3, file, 325, 20, 13892);
+    			attr_dev(div4, "class", "row");
+    			add_location(div4, file, 308, 16, 13052);
+    			add_location(div5, file, 306, 12, 12854);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, h1);
+    			append_dev(h1, t0);
+    			append_dev(h1, t1);
+    			append_dev(div5, t2);
+    			append_dev(div5, div4);
+    			append_dev(div4, p0);
+    			append_dev(div4, t4);
+    			mount_component(csvdownloader, div4, null);
+    			append_dev(div4, t5);
+    			append_dev(div4, div3);
+    			append_dev(div3, p1);
+    			append_dev(div3, t7);
+    			append_dev(div3, p2);
+    			append_dev(div3, t9);
+    			append_dev(div3, div1);
+    			append_dev(div1, h60);
+    			append_dev(div1, t11);
+    			append_dev(div1, div0);
+    			append_dev(div0, a);
+    			append_dev(div0, t13);
+    			append_dev(div0, p3);
+    			append_dev(p3, kbd0);
+    			append_dev(div3, t15);
+    			append_dev(div3, div2);
+    			append_dev(div2, h61);
+    			append_dev(div2, t17);
+    			append_dev(div2, p4);
+    			append_dev(p4, kbd1);
+    			append_dev(p4, t19);
+    			append_dev(p4, kbd2);
+    			append_dev(p4, t21);
+    			append_dev(div2, t22);
+    			append_dev(div2, p5);
+    			append_dev(p5, t23);
+    			append_dev(p5, kbd3);
+    			append_dev(p5, t25);
+    			append_dev(p5, del);
+    			append_dev(p5, t27);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty[0] & /*employerName*/ 32768) set_data_dev(t1, /*employerName*/ ctx[15]);
+    			const csvdownloader_changes = {};
+
+    			if (dirty[0] & /*employerName, sector, contract, remote, location, locationRemoteDilemma*/ 2064384) csvdownloader_changes.data = [
+    				{
+    					"employerName": /*employerName*/ ctx[15],
+    					"sector": /*sector*/ ctx[16],
+    					"contract": /*contract*/ ctx[17],
+    					"remote": /*remote*/ ctx[18],
+    					"loaction": /*location*/ ctx[19],
+    					"locationRemoteDilemma": /*locationRemoteDilemma*/ ctx[20]
+    				}
+    			];
+
+    			if (dirty[1] & /*$$scope*/ 262144) {
+    				csvdownloader_changes.$$scope = { dirty, ctx };
+    			}
+
+    			csvdownloader.$set(csvdownloader_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(csvdownloader.$$.fragment, local);
+
+    			add_render_callback(() => {
+    				if (div5_outro) div5_outro.end(1);
+    				div5_intro = create_in_transition(div5, fade, { delay: 500, duration: 1000 });
+    				div5_intro.start();
+    			});
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(csvdownloader.$$.fragment, local);
+    			if (div5_intro) div5_intro.invalidate();
+    			div5_outro = create_out_transition(div5, fade, { delay: 0, duration: 500 });
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div5);
+    			destroy_component(csvdownloader);
+    			if (detaching && div5_outro) div5_outro.end();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(306:8) {#if p9Result}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (312:20) <CSVDownloader                             data={[{                             "employerName": employerName,                             "sector": sector,                             "contract": contract,                             "remote": remote,                             "loaction": location,                             "locationRemoteDilemma": locationRemoteDilemma                         }]}                             type={'button'}                             filename={'filename'}                             bom={true}>
+    function create_default_slot(ctx) {
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text("Télécharger le fichier");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot.name,
+    		type: "slot",
+    		source: "(312:20) <CSVDownloader                             data={[{                             \\\"employerName\\\": employerName,                             \\\"sector\\\": sector,                             \\\"contract\\\": contract,                             \\\"remote\\\": remote,                             \\\"loaction\\\": location,                             \\\"locationRemoteDilemma\\\": locationRemoteDilemma                         }]}                             type={'button'}                             filename={'filename'}                             bom={true}>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (353:8) {#if p9GameOver}
+    function create_if_block(ctx) {
+    	let div5;
+    	let h1;
+    	let t1;
+    	let div4;
+    	let p0;
+    	let t2;
+    	let t3;
+    	let t4;
+    	let t5;
+    	let p1;
+    	let t6;
+    	let t7;
+    	let t8;
+    	let div3;
+    	let p2;
+    	let t10;
+    	let div1;
+    	let h60;
+    	let t12;
+    	let div0;
+    	let a;
+    	let t14;
+    	let div2;
+    	let h61;
+    	let t16;
+    	let p3;
+    	let kbd0;
+    	let t18;
+    	let kbd1;
+    	let t20;
+    	let t21;
+    	let p4;
+    	let t22;
+    	let del;
+    	let t24;
+    	let t25;
+    	let about;
+    	let div5_intro;
+    	let current;
+    	about = new About({ $$inline: true });
+
+    	const block = {
+    		c: function create() {
+    			div5 = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Fin du voyage";
+    			t1 = space();
+    			div4 = element("div");
+    			p0 = element("p");
+    			t2 = text("Merci ");
+    			t3 = text(/*employerName*/ ctx[15]);
+    			t4 = text(" d'avoir répondu à ces question.");
+    			t5 = space();
+    			p1 = element("p");
+    			t6 = text("Nous ne pourrons pas travailler ensemble car ");
+    			t7 = text(/*p9GameOverExplanation*/ ctx[12]);
+    			t8 = space();
+    			div3 = element("div");
+    			p2 = element("p");
+    			p2.textContent = "Si malgré tout vous pensez que nous pourrions tout de même travailler\n                            ensemble vous pouvez m'envoyer un courriel à :";
+    			t10 = space();
+    			div1 = element("div");
+    			h60 = element("h6");
+    			h60.textContent = "Méthode Auto";
+    			t12 = space();
+    			div0 = element("div");
+    			a = element("a");
+    			a.textContent = "Lien mailto";
+    			t14 = space();
+    			div2 = element("div");
+    			h61 = element("h6");
+    			h61.textContent = "Méthode Manuelle";
+    			t16 = space();
+    			p3 = element("p");
+    			kbd0 = element("kbd");
+    			kbd0.textContent = "damien@giraudet.me";
+    			t18 = text(" avec comme préfixe de votre objet\n                                ");
+    			kbd1 = element("kbd");
+    			kbd1.textContent = "[job-retry-v1.1]";
+    			t20 = text(".");
+    			t21 = space();
+    			p4 = element("p");
+    			t22 = text("C'est important de bien mettre ce préfixe à votre objet sinon\n                                ");
+    			del = element("del");
+    			del.textContent = "je";
+    			t24 = text("\n                                mon automatisation ne traitera pas le courriel.");
+    			t25 = space();
+    			create_component(about.$$.fragment);
+    			attr_dev(h1, "class", "pb-4 mb-5 border-bottom border-primary");
+    			add_location(h1, file, 354, 16, 15706);
+    			attr_dev(p0, "class", "lead");
+    			add_location(p0, file, 356, 20, 15830);
+    			attr_dev(p1, "class", "lead");
+    			add_location(p1, file, 357, 20, 15923);
+    			attr_dev(p2, "class", "text-sm-start");
+    			add_location(p2, file, 359, 24, 16074);
+    			attr_dev(h60, "class", "pb-2 my-3 border-bottom border-primary");
+    			add_location(h60, file, 362, 28, 16320);
+    			attr_dev(a, "class", "btn btn-outline-primary");
+    			attr_dev(a, "href", "mailto:damien@giraudet.me?subject=[job-retry-v1.1]");
+    			add_location(a, file, 364, 32, 16467);
+    			attr_dev(div0, "class", "row");
+    			add_location(div0, file, 363, 28, 16417);
+    			attr_dev(div1, "class", "col-4");
+    			add_location(div1, file, 361, 24, 16272);
+    			attr_dev(h61, "class", "pb-2 my-3 border-bottom border-primary");
+    			add_location(h61, file, 370, 28, 16786);
+    			add_location(kbd0, file, 371, 52, 16911);
+    			add_location(kbd1, file, 372, 32, 17007);
+    			attr_dev(p3, "class", "text-justify");
+    			add_location(p3, file, 371, 28, 16887);
+    			add_location(del, file, 374, 32, 17187);
+    			attr_dev(p4, "class", "text-justify");
+    			add_location(p4, file, 373, 28, 17068);
+    			attr_dev(div2, "class", "col-8");
+    			add_location(div2, file, 369, 24, 16738);
+    			attr_dev(div3, "class", "row");
+    			add_location(div3, file, 358, 20, 16032);
+    			attr_dev(div4, "class", "row");
+    			add_location(div4, file, 355, 16, 15792);
+    			add_location(div5, file, 353, 12, 15640);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, h1);
+    			append_dev(div5, t1);
+    			append_dev(div5, div4);
+    			append_dev(div4, p0);
+    			append_dev(p0, t2);
+    			append_dev(p0, t3);
+    			append_dev(p0, t4);
+    			append_dev(div4, t5);
+    			append_dev(div4, p1);
+    			append_dev(p1, t6);
+    			append_dev(p1, t7);
+    			append_dev(div4, t8);
+    			append_dev(div4, div3);
+    			append_dev(div3, p2);
+    			append_dev(div3, t10);
+    			append_dev(div3, div1);
+    			append_dev(div1, h60);
+    			append_dev(div1, t12);
+    			append_dev(div1, div0);
+    			append_dev(div0, a);
+    			append_dev(div3, t14);
+    			append_dev(div3, div2);
+    			append_dev(div2, h61);
+    			append_dev(div2, t16);
+    			append_dev(div2, p3);
+    			append_dev(p3, kbd0);
+    			append_dev(p3, t18);
+    			append_dev(p3, kbd1);
+    			append_dev(p3, t20);
+    			append_dev(div2, t21);
+    			append_dev(div2, p4);
+    			append_dev(p4, t22);
+    			append_dev(p4, del);
+    			append_dev(p4, t24);
+    			append_dev(div5, t25);
+    			mount_component(about, div5, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (!current || dirty[0] & /*employerName*/ 32768) set_data_dev(t3, /*employerName*/ ctx[15]);
+    			if (!current || dirty[0] & /*p9GameOverExplanation*/ 4096) set_data_dev(t7, /*p9GameOverExplanation*/ ctx[12]);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(about.$$.fragment, local);
+
+    			if (!div5_intro) {
+    				add_render_callback(() => {
+    					div5_intro = create_in_transition(div5, fade, { delay: 500, duration: 1000 });
+    					div5_intro.start();
+    				});
+    			}
+
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(about.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div5);
+    			destroy_component(about);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(353:8) {#if p9GameOver}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let div2;
+    	let main;
+    	let t0;
+    	let t1;
+    	let t2;
+    	let t3;
+    	let t4;
+    	let t5;
+    	let t6;
+    	let t7;
+    	let t8;
+    	let t9;
+    	let footer;
+    	let div1;
+    	let div0;
+    	let current;
+    	let if_block0 = /*p1Name*/ ctx[0] && create_if_block_11(ctx);
+    	let if_block1 = /*p1Explication*/ ctx[2] && create_if_block_10(ctx);
+    	let if_block2 = /*p2Sector*/ ctx[3] && create_if_block_9(ctx);
+    	let if_block3 = /*p2Contract*/ ctx[4] && create_if_block_8(ctx);
+    	let if_block4 = /*p2Remote*/ ctx[5] && create_if_block_6(ctx);
+    	let if_block5 = /*p2Location*/ ctx[7] && create_if_block_4(ctx);
+    	let if_block6 = /*p2LocationRemoteDilemma*/ ctx[9] && create_if_block_3(ctx);
+    	let if_block7 = /*p3HL*/ ctx[10] && create_if_block_2(ctx);
+    	let if_block8 = /*p9Result*/ ctx[13] && create_if_block_1(ctx);
+    	let if_block9 = /*p9GameOver*/ ctx[11] && create_if_block(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div2 = element("div");
+    			main = element("main");
+    			if (if_block0) if_block0.c();
+    			t0 = space();
+    			if (if_block1) if_block1.c();
+    			t1 = space();
+    			if (if_block2) if_block2.c();
+    			t2 = space();
+    			if (if_block3) if_block3.c();
+    			t3 = space();
+    			if (if_block4) if_block4.c();
+    			t4 = space();
+    			if (if_block5) if_block5.c();
+    			t5 = space();
+    			if (if_block6) if_block6.c();
+    			t6 = space();
+    			if (if_block7) if_block7.c();
+    			t7 = space();
+    			if (if_block8) if_block8.c();
+    			t8 = space();
+    			if (if_block9) if_block9.c();
+    			t9 = space();
+    			footer = element("footer");
+    			div1 = element("div");
+    			div0 = element("div");
+    			attr_dev(main, "class", "3px");
+    			add_location(main, file, 136, 4, 3479);
+    			attr_dev(div0, "class", "progress-bar progress-bar-striped");
+    			attr_dev(div0, "role", "progressbar");
+    			set_style(div0, "width", /*progressBar*/ ctx[14] + "%");
+    			attr_dev(div0, "aria-valuenow", /*progressBar*/ ctx[14]);
+    			attr_dev(div0, "aria-valuemin", "0");
+    			attr_dev(div0, "aria-valuemax", "100");
+    			add_location(div0, file, 387, 12, 17520);
+    			attr_dev(div1, "class", "progress");
+    			add_location(div1, file, 386, 8, 17485);
+    			attr_dev(footer, "class", "mt-auto text-white-50");
+    			add_location(footer, file, 385, 4, 17438);
+    			attr_dev(div2, "class", "cover-container d-flex w-100 h-100 p-3 mx-auto flex-column");
+    			add_location(div2, file, 135, 0, 3402);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div2, anchor);
+    			append_dev(div2, main);
+    			if (if_block0) if_block0.m(main, null);
+    			append_dev(main, t0);
+    			if (if_block1) if_block1.m(main, null);
+    			append_dev(main, t1);
+    			if (if_block2) if_block2.m(main, null);
+    			append_dev(main, t2);
+    			if (if_block3) if_block3.m(main, null);
+    			append_dev(main, t3);
+    			if (if_block4) if_block4.m(main, null);
+    			append_dev(main, t4);
+    			if (if_block5) if_block5.m(main, null);
+    			append_dev(main, t5);
+    			if (if_block6) if_block6.m(main, null);
+    			append_dev(main, t6);
+    			if (if_block7) if_block7.m(main, null);
+    			append_dev(main, t7);
+    			if (if_block8) if_block8.m(main, null);
+    			append_dev(main, t8);
+    			if (if_block9) if_block9.m(main, null);
+    			append_dev(div2, t9);
+    			append_dev(div2, footer);
+    			append_dev(footer, div1);
+    			append_dev(div1, div0);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (/*p1Name*/ ctx[0]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
+
+    					if (dirty[0] & /*p1Name*/ 1) {
+    						transition_in(if_block0, 1);
+    					}
+    				} else {
+    					if_block0 = create_if_block_11(ctx);
+    					if_block0.c();
+    					transition_in(if_block0, 1);
+    					if_block0.m(main, t0);
+    				}
+    			} else if (if_block0) {
+    				group_outros();
+
+    				transition_out(if_block0, 1, 1, () => {
+    					if_block0 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p1Explication*/ ctx[2]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+
+    					if (dirty[0] & /*p1Explication*/ 4) {
+    						transition_in(if_block1, 1);
+    					}
+    				} else {
+    					if_block1 = create_if_block_10(ctx);
+    					if_block1.c();
+    					transition_in(if_block1, 1);
+    					if_block1.m(main, t1);
+    				}
+    			} else if (if_block1) {
+    				group_outros();
+
+    				transition_out(if_block1, 1, 1, () => {
+    					if_block1 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p2Sector*/ ctx[3]) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+
+    					if (dirty[0] & /*p2Sector*/ 8) {
+    						transition_in(if_block2, 1);
+    					}
+    				} else {
+    					if_block2 = create_if_block_9(ctx);
+    					if_block2.c();
+    					transition_in(if_block2, 1);
+    					if_block2.m(main, t2);
+    				}
+    			} else if (if_block2) {
+    				group_outros();
+
+    				transition_out(if_block2, 1, 1, () => {
+    					if_block2 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p2Contract*/ ctx[4]) {
+    				if (if_block3) {
+    					if_block3.p(ctx, dirty);
+
+    					if (dirty[0] & /*p2Contract*/ 16) {
+    						transition_in(if_block3, 1);
+    					}
+    				} else {
+    					if_block3 = create_if_block_8(ctx);
+    					if_block3.c();
+    					transition_in(if_block3, 1);
+    					if_block3.m(main, t3);
+    				}
+    			} else if (if_block3) {
+    				group_outros();
+
+    				transition_out(if_block3, 1, 1, () => {
+    					if_block3 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p2Remote*/ ctx[5]) {
+    				if (if_block4) {
+    					if_block4.p(ctx, dirty);
+
+    					if (dirty[0] & /*p2Remote*/ 32) {
+    						transition_in(if_block4, 1);
+    					}
+    				} else {
+    					if_block4 = create_if_block_6(ctx);
+    					if_block4.c();
+    					transition_in(if_block4, 1);
+    					if_block4.m(main, t4);
+    				}
+    			} else if (if_block4) {
+    				group_outros();
+
+    				transition_out(if_block4, 1, 1, () => {
+    					if_block4 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p2Location*/ ctx[7]) {
+    				if (if_block5) {
+    					if_block5.p(ctx, dirty);
+
+    					if (dirty[0] & /*p2Location*/ 128) {
+    						transition_in(if_block5, 1);
+    					}
+    				} else {
+    					if_block5 = create_if_block_4(ctx);
+    					if_block5.c();
+    					transition_in(if_block5, 1);
+    					if_block5.m(main, t5);
+    				}
+    			} else if (if_block5) {
+    				group_outros();
+
+    				transition_out(if_block5, 1, 1, () => {
+    					if_block5 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p2LocationRemoteDilemma*/ ctx[9]) {
+    				if (if_block6) {
+    					if_block6.p(ctx, dirty);
+
+    					if (dirty[0] & /*p2LocationRemoteDilemma*/ 512) {
+    						transition_in(if_block6, 1);
+    					}
+    				} else {
+    					if_block6 = create_if_block_3(ctx);
+    					if_block6.c();
+    					transition_in(if_block6, 1);
+    					if_block6.m(main, t6);
+    				}
+    			} else if (if_block6) {
+    				group_outros();
+
+    				transition_out(if_block6, 1, 1, () => {
+    					if_block6 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p3HL*/ ctx[10]) {
+    				if (if_block7) {
+    					if_block7.p(ctx, dirty);
+
+    					if (dirty[0] & /*p3HL*/ 1024) {
+    						transition_in(if_block7, 1);
+    					}
+    				} else {
+    					if_block7 = create_if_block_2(ctx);
+    					if_block7.c();
+    					transition_in(if_block7, 1);
+    					if_block7.m(main, t7);
+    				}
+    			} else if (if_block7) {
+    				group_outros();
+
+    				transition_out(if_block7, 1, 1, () => {
+    					if_block7 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p9Result*/ ctx[13]) {
+    				if (if_block8) {
+    					if_block8.p(ctx, dirty);
+
+    					if (dirty[0] & /*p9Result*/ 8192) {
+    						transition_in(if_block8, 1);
+    					}
+    				} else {
+    					if_block8 = create_if_block_1(ctx);
+    					if_block8.c();
+    					transition_in(if_block8, 1);
+    					if_block8.m(main, t8);
+    				}
+    			} else if (if_block8) {
+    				group_outros();
+
+    				transition_out(if_block8, 1, 1, () => {
+    					if_block8 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (/*p9GameOver*/ ctx[11]) {
+    				if (if_block9) {
+    					if_block9.p(ctx, dirty);
+
+    					if (dirty[0] & /*p9GameOver*/ 2048) {
+    						transition_in(if_block9, 1);
+    					}
+    				} else {
+    					if_block9 = create_if_block(ctx);
+    					if_block9.c();
+    					transition_in(if_block9, 1);
+    					if_block9.m(main, null);
+    				}
+    			} else if (if_block9) {
+    				group_outros();
+
+    				transition_out(if_block9, 1, 1, () => {
+    					if_block9 = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (!current || dirty[0] & /*progressBar*/ 16384) {
+    				set_style(div0, "width", /*progressBar*/ ctx[14] + "%");
+    			}
+
+    			if (!current || dirty[0] & /*progressBar*/ 16384) {
+    				attr_dev(div0, "aria-valuenow", /*progressBar*/ ctx[14]);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block0);
+    			transition_in(if_block1);
+    			transition_in(if_block2);
+    			transition_in(if_block3);
+    			transition_in(if_block4);
+    			transition_in(if_block5);
+    			transition_in(if_block6);
+    			transition_in(if_block7);
+    			transition_in(if_block8);
+    			transition_in(if_block9);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block0);
+    			transition_out(if_block1);
+    			transition_out(if_block2);
+    			transition_out(if_block3);
+    			transition_out(if_block4);
+    			transition_out(if_block5);
+    			transition_out(if_block6);
+    			transition_out(if_block7);
+    			transition_out(if_block8);
+    			transition_out(if_block9);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div2);
+    			if (if_block0) if_block0.d();
+    			if (if_block1) if_block1.d();
+    			if (if_block2) if_block2.d();
+    			if (if_block3) if_block3.d();
+    			if (if_block4) if_block4.d();
+    			if (if_block5) if_block5.d();
+    			if (if_block6) if_block6.d();
+    			if (if_block7) if_block7.d();
+    			if (if_block8) if_block8.d();
+    			if (if_block9) if_block9.d();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    const progressBarTotalSteps = 8;
+
+    function instance($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('App', slots, []);
+    	let p1Name = true;
+    	let p1InvalidName = false;
+    	let p1Explication = false;
+    	let p2Sector = false;
+    	let p2Contract = false;
+    	let p2Remote = false;
+    	let p2RemoteVal = 3;
+    	let p2Location = false;
+    	let p2InvalidLocation = false;
+    	let p2LocationRemoteDilemma = false;
+    	let p3HL = false;
+    	let p9GameOver = false;
+    	let p9GameOverExplanation = "";
+    	let p9Result = false;
+    	let progressBar = 0;
+
+    	// Job infos
+    	let employerName;
+
+    	let sector;
+    	let contract;
+    	let remote;
+    	let location;
+    	let locationRemoteDilemma;
+    	let HLTimeDilemma = false;
+
+    	function incrementProgressBar() {
+    		$$invalidate(14, progressBar += 100 / progressBarTotalSteps);
+    	}
+
+    	function finishProgressBar() {
+    		$$invalidate(14, progressBar = 100);
+    	}
+
+    	function initGameOver(reason) {
+    		$$invalidate(12, p9GameOverExplanation = reason);
+    		$$invalidate(11, p9GameOver = true);
+    		$$invalidate(14, progressBar = 100);
+    	}
+
+    	function handleP1Name() {
+    		if (!employerName || employerName.length < 3) {
+    			$$invalidate(1, p1InvalidName = true);
+    		} else {
+    			$$invalidate(0, p1Name = false);
+    			$$invalidate(2, p1Explication = true);
+    			incrementProgressBar();
+    		}
+    	}
+
+    	function handleP1Explication() {
+    		$$invalidate(2, p1Explication = false);
+    		$$invalidate(3, p2Sector = true);
+    		incrementProgressBar();
+    	}
+
+    	function handleP2Sector(val) {
+    		$$invalidate(16, sector = val);
+    		$$invalidate(3, p2Sector = false);
+
+    		if (val === SECTOR.GOOD || val === SECTOR.NEUTRAL) {
+    			$$invalidate(3, p2Sector = false);
+    			$$invalidate(4, p2Contract = true);
+    			incrementProgressBar();
+    		} else initGameOver(GAME_OVER_SECTOR);
+    	}
+
+    	function handleP2Contract(val) {
+    		$$invalidate(17, contract = val);
+    		$$invalidate(4, p2Contract = false);
+    		$$invalidate(5, p2Remote = true);
+    		incrementProgressBar();
+    	}
+
+    	function handleP2Remote(val) {
+    		$$invalidate(18, remote = val);
+    		$$invalidate(5, p2Remote = false);
+    		$$invalidate(7, p2Location = true);
+    		incrementProgressBar();
+    	}
+
+    	function handleP2Location(val) {
+    		if (!val || val !== "44" && val.length < 3) {
+    			$$invalidate(8, p2InvalidLocation = true);
+    		} else {
+    			$$invalidate(19, location = val);
+    			$$invalidate(7, p2Location = false);
+
+    			if (val !== "44" && remote < 2) initGameOver(GAME_OVER_LOCATION); else if (val !== "44" && remote < 4) {
+    				$$invalidate(20, locationRemoteDilemma = true);
+    				$$invalidate(9, p2LocationRemoteDilemma = true);
+    			} else {
+    				if (contract === CONTRACT.FULL_TIME) {
+    					$$invalidate(10, p3HL = true);
+    				} else {
+    					$$invalidate(13, p9Result = true);
+    				}
+
+    				finishProgressBar();
+    			}
+    		}
+    	}
+
+    	function handleP2locationRemoteDilemma(answer) {
+    		$$invalidate(9, p2LocationRemoteDilemma = false);
+
+    		if (answer) {
+    			$$invalidate(18, remote = 4);
+
+    			if (contract === CONTRACT.FULL_TIME) {
+    				$$invalidate(10, p3HL = true);
+    			} else {
+    				$$invalidate(13, p9Result = true);
+    			}
+
+    			finishProgressBar();
+    		} else initGameOver(GAME_OVER_LOCATION_REMOTE);
+    	}
+
+    	function handleP3HL(val) {
+    		$$invalidate(10, p3HL = false);
+
+    		if (!val) {
+    			initGameOver(GAME_OVER_HL);
+    		} else {
+    			HLTimeDilemma = true;
+    			finishProgressBar();
+    			$$invalidate(13, p9Result = true);
+    		}
+    	}
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
+    	});
+
+    	function input_input_handler() {
+    		employerName = this.value;
+    		$$invalidate(15, employerName);
+    	}
+
+    	const click_handler = () => handleP2Sector(SECTOR.GOOD);
+    	const click_handler_1 = () => handleP2Sector(SECTOR.BAD);
+    	const click_handler_2 = () => handleP2Sector(SECTOR.NEUTRAL);
+    	const click_handler_3 = () => handleP2Contract(CONTRACT.FULL_TIME);
+    	const click_handler_4 = () => handleP2Contract(CONTRACT.PART_TIME);
+    	const click_handler_5 = () => handleP2Contract(CONTRACT.FREELANCE);
+
+    	function input_change_input_handler() {
+    		p2RemoteVal = to_number(this.value);
+    		$$invalidate(6, p2RemoteVal);
+    	}
+
+    	const click_handler_6 = () => handleP2Remote(p2RemoteVal);
+    	const click_handler_7 = () => handleP2Location("44");
+
+    	function input_input_handler_1() {
+    		location = this.value;
+    		$$invalidate(19, location);
+    	}
+
+    	const click_handler_8 = () => handleP2Location(location);
+    	const click_handler_9 = () => handleP2locationRemoteDilemma(true);
+    	const click_handler_10 = () => handleP2locationRemoteDilemma(false);
+    	const click_handler_11 = () => handleP3HL(true);
+    	const click_handler_12 = () => handleP3HL(false);
+
+    	$$self.$capture_state = () => ({
+    		fade,
+    		SECTOR,
+    		CONTRACT,
+    		CSVDownloader,
+    		GAME_OVER_HL,
+    		GAME_OVER_LOCATION,
+    		GAME_OVER_LOCATION_REMOTE,
+    		GAME_OVER_SECTOR,
+    		About,
+    		p1Name,
+    		p1InvalidName,
+    		p1Explication,
+    		p2Sector,
+    		p2Contract,
+    		p2Remote,
+    		p2RemoteVal,
+    		p2Location,
+    		p2InvalidLocation,
+    		p2LocationRemoteDilemma,
+    		p3HL,
+    		p9GameOver,
+    		p9GameOverExplanation,
+    		p9Result,
+    		progressBar,
+    		progressBarTotalSteps,
+    		employerName,
+    		sector,
+    		contract,
+    		remote,
+    		location,
+    		locationRemoteDilemma,
+    		HLTimeDilemma,
+    		incrementProgressBar,
+    		finishProgressBar,
+    		initGameOver,
+    		handleP1Name,
+    		handleP1Explication,
+    		handleP2Sector,
+    		handleP2Contract,
+    		handleP2Remote,
+    		handleP2Location,
+    		handleP2locationRemoteDilemma,
+    		handleP3HL
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('p1Name' in $$props) $$invalidate(0, p1Name = $$props.p1Name);
+    		if ('p1InvalidName' in $$props) $$invalidate(1, p1InvalidName = $$props.p1InvalidName);
+    		if ('p1Explication' in $$props) $$invalidate(2, p1Explication = $$props.p1Explication);
+    		if ('p2Sector' in $$props) $$invalidate(3, p2Sector = $$props.p2Sector);
+    		if ('p2Contract' in $$props) $$invalidate(4, p2Contract = $$props.p2Contract);
+    		if ('p2Remote' in $$props) $$invalidate(5, p2Remote = $$props.p2Remote);
+    		if ('p2RemoteVal' in $$props) $$invalidate(6, p2RemoteVal = $$props.p2RemoteVal);
+    		if ('p2Location' in $$props) $$invalidate(7, p2Location = $$props.p2Location);
+    		if ('p2InvalidLocation' in $$props) $$invalidate(8, p2InvalidLocation = $$props.p2InvalidLocation);
+    		if ('p2LocationRemoteDilemma' in $$props) $$invalidate(9, p2LocationRemoteDilemma = $$props.p2LocationRemoteDilemma);
+    		if ('p3HL' in $$props) $$invalidate(10, p3HL = $$props.p3HL);
+    		if ('p9GameOver' in $$props) $$invalidate(11, p9GameOver = $$props.p9GameOver);
+    		if ('p9GameOverExplanation' in $$props) $$invalidate(12, p9GameOverExplanation = $$props.p9GameOverExplanation);
+    		if ('p9Result' in $$props) $$invalidate(13, p9Result = $$props.p9Result);
+    		if ('progressBar' in $$props) $$invalidate(14, progressBar = $$props.progressBar);
+    		if ('employerName' in $$props) $$invalidate(15, employerName = $$props.employerName);
+    		if ('sector' in $$props) $$invalidate(16, sector = $$props.sector);
+    		if ('contract' in $$props) $$invalidate(17, contract = $$props.contract);
+    		if ('remote' in $$props) $$invalidate(18, remote = $$props.remote);
+    		if ('location' in $$props) $$invalidate(19, location = $$props.location);
+    		if ('locationRemoteDilemma' in $$props) $$invalidate(20, locationRemoteDilemma = $$props.locationRemoteDilemma);
+    		if ('HLTimeDilemma' in $$props) HLTimeDilemma = $$props.HLTimeDilemma;
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		p1Name,
+    		p1InvalidName,
+    		p1Explication,
+    		p2Sector,
+    		p2Contract,
+    		p2Remote,
+    		p2RemoteVal,
+    		p2Location,
+    		p2InvalidLocation,
+    		p2LocationRemoteDilemma,
+    		p3HL,
+    		p9GameOver,
+    		p9GameOverExplanation,
+    		p9Result,
+    		progressBar,
+    		employerName,
+    		sector,
+    		contract,
+    		remote,
+    		location,
+    		locationRemoteDilemma,
+    		handleP1Name,
+    		handleP1Explication,
+    		handleP2Sector,
+    		handleP2Contract,
+    		handleP2Remote,
+    		handleP2Location,
+    		handleP2locationRemoteDilemma,
+    		handleP3HL,
+    		input_input_handler,
+    		click_handler,
+    		click_handler_1,
+    		click_handler_2,
+    		click_handler_3,
+    		click_handler_4,
+    		click_handler_5,
+    		input_change_input_handler,
+    		click_handler_6,
+    		click_handler_7,
+    		input_input_handler_1,
+    		click_handler_8,
+    		click_handler_9,
+    		click_handler_10,
+    		click_handler_11,
+    		click_handler_12
+    	];
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, {}, null, [-1, -1]);
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "App",
+    			options,
+    			id: create_fragment.name
+    		});
+    	}
+    }
+
+    let app = new App({
+        target: document.body
+    });
+
+    return app;
+
+})();
 //# sourceMappingURL=bundle.js.map
